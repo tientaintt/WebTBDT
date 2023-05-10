@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/reponsive.css">
+    <link rel="stylesheet" href="./fontawesome-free-5.15.3-web/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <title>Trang chủ</title>
+
+</head>
+<body>
+<section>
+    <div class="header">
+        <div id="top1">
+            <a th:href="@{/}"><img src="/image/logo_m.png" style="width: 90%; height: 200%;"/></a>
+        </div>
+        <div class="seachbox">
+            <input type="text" placeholder="Tìm Kiếm Sản Phẩm ">
+            <div class="seach-btn">
+                <a href="#"><i class="fa fa-search fa-2x" aria-hidden="true" style="color: white;"></i></a>
+            </div>
+        </div>
+        <div id="phone">
+            <img src="./image/phone.svg" alt="">
+            <p>Gọi đặt hàng:</p>
+            <h2>0372082758</h2>
+        </div>
+    </div>
+</section>
+<section id="menu">
+    <ul>
+        <li><a href="index.html"><b>Trang Chủ</b></a></li>
+        <li><a href=""><b>Danh mục sản phẩm</b></a>
+            <ul class="submenu" style="width: 100%; left: 0;">
+            <th:block th:each="category :${categorylist}">
+                <li  style="width: 100%;">
+                    <a th:href="@{/Category/{idCategory}(idCategory=${category.id})}"><b th:text="${category.name}"></b></a>
+                </li>
+         </th:block>
+            </ul>
+        </li>
+
+
+        <li><a href="gio_hang.html"><b>Giỏ Hàng</b></a></li>
+        <li><a href=""><b>Đơn hàng</b></a></li>
+
+        <li th:if="${session.account == null}"><a th:href="@{/Signin}"><b>Đăng Nhập</b></a></li>
+        <th:block th:if="${session.account!=null}">
+            <li><a><b th:text="${session.account.name}"></b></a></li>
+            <li><a th:href="@{/SignOut}"><b>Đăng Xuất</b></a></li>
+        </th:block>
+        <li style="display: none;">
+            <b>
+                <img src="https://i.pinimg.com/70x/83/74/f9/8374f9316fd820b884395c6386d61fed.jpg"
+                     style="border-radius: 50%; width: 40px; height: 40px; vertical-align: middle;"/>
+            </b>
+            <a href="index.html">
+                <b>Tien Tai</b>
+            </a>
+        </li>
+        <li style="display: none;">
+            <a href="index.html">
+                <b>Đăng xuất</b>
+            </a>
+        </li>
+    </ul>
+</section>
+<section>
+    <div class="via">
+        <div class="mySlides">
+            <img src="./image/banner-iphone-12-mini-1200-140.gif" style="width:100%">
+        </div>
+
+        <div class="mySlides">
+            <img src="./image/Bannerxiaomi.png" style="width:100%">
+        </div>
+
+        <div class="mySlides">
+            <img src="./image/donghothongminh.gif" style="width:100%">
+        </div>
+    </div>
+    <script src="./js/jsslide_via.js"></script>
+</section>
+
+<th:block th:each="c:${categorylist}">
+    <section id="do-choi-cong-nghe">
+        <div class="tieu-de">
+            <p th:text="${c.name}"></p>
+        </div>
+        <hr size="5px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+        <div class="row">
+            <th:block th:each="product:${c.getProductEntities()}">
+
+                <div class="col-3 col-s-6 box" style="padding: 5px">
+                    <div class="contentsp">
+                        <div class="bao-sp-chinh">
+                            <a href="#">
+                                <img th:src="${product.getImagelist().get(0).getUrlImage()}" style="width: 100%;">
+                                <!--                                <img src="https://firebasestorage.googleapis.com/v0/b/webtmdt-fec1b.appspot.com/o/realme-7i-xanh-duong_1.jpg?alt=media&token=30856f2f-d8dd-4c93-8321-a6fe5d64b72b">-->
+                                <div class="box-name" th:text="${product.name}"></div>
+                                <div style="color: red; margin-top: 5px; margin-left: 5px; font-size: 17px;">
+                                    <span th:text="${product.getPrice()}+'₫'">2</span>
+                                </div>
+                                <div class="danh-gia">
+                                    <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+                                    <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+                                    <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+                                    <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+                                    <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+                                    <span style="font-size: 12px;">10 đánh giá</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+
+        </div>
+
+    </section>
+</th:block>
+
+<section id="thongtin">
+    <div class="header-thongtin">
+        <div class="nav__thongtin">
+            <img src="./image/logo_m.png">
+            <div class="content_thongtin">
+                <p>Hệ thống bán thiết bị điện tử uy tín toàn quốc</p>
+                <ul>
+                    <li>Hotline 037.208.2758</li>
+                    <li>Cơ sở Hà Nội: 295 Khâm Thiên - Đống Đa - Hà Nội</li>
+                    <li>Cơ sở Phú Thọ: Tp.Việt Trì - Phú Thọ</li>
+                    <li>Cơ sở TP.Hồ Chí Minh: 100 Thạnh Mỹ Lợi - Quận 2 - TP.Hồ Chí Minh</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header-hotro">
+        <div class="nav__hotro">
+            <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+            <ul>
+                <li><a href="#">Cách sạc pin điện thoại kéo dài tuổi thọ pin</a></li>
+                <li><a href="#">Quy trình bảo hành điện thoại</a></li>
+                <li><a href="#">Các phần mềm diện thoại hữu ích nên có</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="header-dichvu">
+        <div class="nav__dichvu">
+            <h3>DỊCH VỤ KHÁCH HÀNG</h3>
+            <ul>
+                <li><a href="#">Giới thiệu về Shop điện thoại</a></li>
+                <li><a href="#">Hướng dẫn đặt hàng</a></li>
+                <li><a href="#">Chính sách đổi trả và bảo hành</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Liên hệ Shop</a></li>
+                <a href="index.html">
+                    <li>Hệ thống cửa hàng</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="header-thanhtoan">
+        <div class="nav__thanhtoan">
+            <h3>THANH TOÁN</h3>
+            <ul>
+                <img src="./image/Visa_Inc._logo.svg.png" style="width: 20%;">
+                <img src=" ./image/iconmastercard.png" style="width: 20%;">
+                <img src=" image/iconatm.png" style="width: 20%;">
+            </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>

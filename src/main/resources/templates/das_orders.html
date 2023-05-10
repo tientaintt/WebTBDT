@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn Hàng</title>
+    <link rel="shortcut icon" href="./image/1x/logo_full_2.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./css/grid.css">
+    <link rel="stylesheet" href="./css/css_das.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <a href="index.html">
+                <img src="./image/1x/logo_full_2.png" alt="Comapny logo">
+            </a>
+            <div class="sidebar-close" id="sidebar-close">
+                <i class='bx bx-left-arrow-alt'></i>
+            </div>
+        </div>
+        <div class="sidebar-user">
+            <div class="sidebar-user-info">
+                <img src="./image/das_img/IMG_0218.JPG" alt="User picture" class="profile-image">
+                <div class="sidebar-user-name">
+                    Dũng Mobile
+                </div>
+            </div>
+            <button class="btn btn-outline">
+                <a href="index.html"><i class='bx bx-log-out bx-flip-horizontal'></i></a>
+            </button>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="das.html">
+                    <i class='bx bx-home'></i>
+                    <span>Trung Tâm Điều Khiển</span>
+                </a>
+            </li>
+            <li>
+                <a href="das_analytic.html">
+                    <i class='bx bx-chart'></i>
+                    <span>Phân Tích</span>
+                </a>
+            </li>
+            <li class="sidebar-submenu">
+                <a href="#" class="sidebar-menu-dropdown">
+                    <i class='bx bx-user-circle'></i>
+                    <span>Tài khoản</span>
+                    <div class="dropdown-icon"></div>
+                </a>
+                <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                    <li>
+                        <a href="#">
+                            Sửa thông tin
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Cài đặt tài khoản
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-submenu">
+                <a href="#" class="sidebar-menu-dropdown">
+                    <i class='bx bx-category'></i>
+                    <span>Quản Lý</span>
+                    <div class="dropdown-icon"></div>
+                </a>
+                <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                    <li>
+                        <a href="das_list_product.html">
+                            Danh sách sản phẩm
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            thêm sản phẩm
+                        </a>
+                    </li>
+                    <li>
+                        <a href="das_orders.html" class="active">
+                           Đơn hàng
+                        </a>
+                    </li>
+                </ul>
+            </li>
+                </ul>
+            </li>
+        </ul>
+     
+    </div>
+    <div class="main">
+        <div class="main-header">
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class='bx bx-menu-alt-right'></i>
+            </div>
+            <div class="main-title">
+                Orders
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="row">
+                <div class="col-12">
+                  
+                    <div class="box">
+                        <div class="box-header">
+                            Đơn hàng gần đây
+                        </div>
+                        <div class="box-body overflow-scroll">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Khách hàng</th>
+                                        <th>Ngày</th>
+                                        <th>Tình trạng đơn hàng</th>
+                                        <th>Tình trạng thanh toán</th>
+                                        <th>Tổng đơn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>kh1</td>
+                                        <td>
+                                            <div class="order-owner">
+                                                <img src="./image/das_img/user-image-2.png" alt="user image">
+                                                <span>Nguyễn Thành Đạt</span>
+                                            </div>
+                                        </td>
+                                        <td>2021-05-09</td>
+                                        <td>
+                                            <span class="order-status order-ready">
+                                                Đang giao hàng
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="payment-status payment-pending">
+                                                <div class="dot"></div>
+                                                <span>Đang chờ xử lý</span>
+                                            </div>
+                                        </td>
+                                        <td>26.990.000 ₫</td>
+                                    </tr>
+                                    <tr>
+                                        <td>kh2</td>
+                                        <td>
+                                            <div class="order-owner">
+                                                <img src="./image/das_img/user-image-3.png" alt="user image">
+                                                <span>Hoàng Việt Kim</span>
+                                            </div>
+                                        </td>
+                                        <td>2021-05-09</td>
+                                        <td>
+                                            <span class="order-status order-shipped">
+                                                Đã nhận hàng
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="payment-status payment-paid">
+                                                <div class="dot"></div>
+                                                <span>Đã thanh toán</span>
+                                            </div>
+                                        </td>
+                                        <td>26.990.000 ₫</td>
+                                    </tr>
+                                    <tr>
+                                        <td>kh3</td>
+                                        <td>
+                                            <div class="order-owner">
+                                                <img src="./image/das_img/1621835955980.png" alt="user image">
+                                                <span>Nguyễn Tiến Dũng</span>
+                                            </div>
+                                        </td>
+                                        <td>2021-05-09</td>
+                                        <td>
+                                            <span class="order-status order-shipped">
+                                                Đã nhận  hàng
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="payment-status payment-paid">
+                                                <div class="dot"></div>
+                                                <span>Đã thanh toán</span>
+                                            </div>
+                                        </td>
+                                        <td>26.990.000 ₫</td>
+                                    </tr>
+                                    <tr>
+                                        <td>kh4</td>
+                                        <td>
+                                            <div class="order-owner">
+                                                <img src="./image/das_img/user-image-2.png" alt="user image">
+                                                <span>Vũ Như Tuấn Hùng</span>
+                                            </div>
+                                        </td>
+                                        <td>2021-05-09</td>
+                                        <td>
+                                            <span class="order-status order-shipped">
+                                                Đã nhận hàng
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="payment-status payment-paid">
+                                                <div class="dot"></div>
+                                                <span>Đã thanh toán</span>
+                                            </div>
+                                        </td>
+                                        <td>26.990.000 ₫</td>
+                                    </tr>
+                                    <tr>
+                                        <td>kh5</td>
+                                        <td>
+                                            <div class="order-owner">
+                                                <img src="./image/das_img/user-image-3.png" alt="user image">
+                                                <span>Nguyễn Mạnh Hùng</span>
+                                            </div>
+                                        </td>
+                                        <td>2021-05-09</td>
+                                        <td>
+                                            <span class="order-status order-shipped">
+                                                Đã nhận hàng
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="payment-status payment-paid">
+                                                <div class="dot"></div>
+                                                <span>Đã thanh toán</span>
+                                            </div>
+                                        </td>
+                                        <td>26.990.000 ₫</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

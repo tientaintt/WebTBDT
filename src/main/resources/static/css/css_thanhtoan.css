@@ -1,0 +1,66 @@
+.row{
+    height: 60px;
+}
+.form-nhap {
+    padding: 20px;
+  }
+.form-nhap h2{
+  margin-left: 8%;
+  padding-bottom: 15px;
+  color: coral;
+}
+  .form-nhap input {
+    width: 100%;
+    line-height: 30px;
+  }
+  .form-nhap select {
+   width: 100%;
+   padding: 8px;
+ }
+ 
+ .from-thanhtoan {
+   padding: 20px;
+ }
+ .from-thanhtoan h2{
+   margin-left: 8%;
+   padding-bottom: 15px;
+   color: coral;
+ }
+ .thanhtoan {
+   margin-top: 10px;
+   border-bottom: 1px solid red;
+   display: flex;
+ }
+ .tong{
+   border-top: red solid 1px;
+   padding-top: 20px;
+   font-size: 18px;
+   font-weight: 600;
+   color: rgb(233, 67, 38);
+ }
+ .tong:last-child{
+   border: none;
+ }
+ .thanhtoan:last-child {
+   border: none;
+ }
+
+.from-thanhtoan button {
+  border: none;
+  background-color:rgba(255, 199, 153, 0.877);
+  width: 25%;
+  line-height: 35px;
+  border-radius: 1em;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+.from-thanhtoan button:hover{
+  text-decoration: underline;
+  background-color: red;
+  color: white;
+}
+ .tensp a{
+  text-decoration: none;
+  color: #FF8247;
+}

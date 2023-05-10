@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
+          rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/css_login.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+<body style="background-image: url(/image/bglogin.jpg);">
+<div class="form" id="signin-form">
+    <a th:href="@{/}" class="form-logo">
+        <img src="/image/logo_m.png" alt="Web">
+    </a>
+    <form th:action="@{SignUp}" method="post">
+    <div class="form-group">
+        <input type="text" class="form-input" placeholder="Tên khách hàng" name="Customername">
+        <span class="form-input-icon err">
+                <i class='bx bx-error-circle'></i>
+            </span>
+        <span class="form-input-icon success">
+                <i class='bx bx-check-circle'></i>
+            </span>
+        <span class="form-input-err-msg" data-err-for="signin-email"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-input" placeholder="Số điện thoai" name="phonenumber">
+        <span class="form-input-icon err">
+                <i class='bx bx-error-circle'></i>
+            </span>
+        <span class="form-input-icon success">
+                <i class='bx bx-check-circle'></i>
+            </span>
+        <span class="form-input-err-msg" data-err-for="signin-email"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-input" placeholder="Tên đăng nhập" name="username" id="signin-email">
+        <span class="form-input-icon err">
+                <i class='bx bx-error-circle'></i>
+            </span>
+        <span class="form-input-icon success">
+                <i class='bx bx-check-circle'></i>
+            </span>
+        <span class="form-input-err-msg" data-err-for="signin-email"></span>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-input" placeholder="Mật khẩu" name="password" id="signin-password">
+        <span class="form-input-icon err">
+                <i class='bx bx-error-circle'></i>
+            </span>
+        <span class="form-input-icon success">
+                <i class='bx bx-check-circle'></i>
+            </span>
+        <span class="form-input-err-msg" data-err-for="signin-password"></span>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-input" placeholder="Nhập lại mật khẩu" name="confirmpass">
+        <span class="form-input-icon err">
+                <i class='bx bx-error-circle'></i>
+            </span>
+        <span class="form-input-icon success">
+                <i class='bx bx-check-circle'></i>
+            </span>
+        <span class="form-input-err-msg" data-err-for="signin-email"></span>
+    </div>
+
+    <div class="form-group form-group-checkbox">
+
+    </div>
+
+        <button class="form-btn" id="signin-btn" >Đăng kí</button>
+    </form>
+
+    <span class="form-delimiter">
+            Hoặc đăng nhập với
+        </span>
+    <div class="form-social">
+        <a href="https://www.facebook.com/" class="form-social-item fb">
+            <i class='bx bxl-facebook'></i>
+        </a>
+        <a href="#" class="form-social-item tw">
+            <i class='bx bxl-twitter'></i>
+        </a>
+        <a href="https://www.google.com/gmail/about/" class="form-social-item gg">
+            <i class='bx bxl-google'></i>
+        </a>
+    </div>
+    <span class="form-txt">
+            Đã tài khoản?
+            <a th:href="@{signin}">Đăng nhập!</a>
+        </span>
+    <span class="form-txt">
+            <a href="#">Quên mật khẩu?</a>
+        </span>
+    <span class="form-txt">
+            <a th:href="@{/home}">Trang Chủ</a>
+        </span>
+</div>
+<script th:if="${error == 'Mật khẩu xác nhận không đúng !!'}">
+    swal("Mật khẩu xác nhận không đúng !!", "", "error");
+</script>
+<script th:if="${error == 'Username đã tồn tại !!'}">
+    swal("Username đã tồn tại !!", "", "error");
+</script>
+<script th:if="${error == 'Vui lòng nhập đủ thông tin !!'}">
+    swal("Vui lòng nhập đủ thông tin !!", "", "error");
+</script>
+</body>
+
+</html>

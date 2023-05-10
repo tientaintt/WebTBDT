@@ -1,0 +1,32 @@
+.breadcroumb{
+    width: 60%;
+    height: 30px;
+    margin-left: 9%;
+    margin-top: 10px;
+    display: flex;
+}
+.breadcroumb a{
+    text-decoration: none;
+    padding-right: 5px;
+    color: rgba(24, 24, 24, 0.767);
+    font-weight: bold;
+    font-size: 13px;
+}
+.breadcroumb i{
+    padding-left: 5px;
+    padding-right: 8px;
+    margin-top: 2px;
+}
+.bao-breadcroumb{
+    padding-right: 5px;
+}
+.bao-breadcroumb:hover a{
+    color: coral;
+    text-decoration: underline;
+}
+.row{
+    margin-top: 5px;
+}
+.tieu-de{
+    margin-top: -1px;
+}

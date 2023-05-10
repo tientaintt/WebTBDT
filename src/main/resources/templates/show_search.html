@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/reponsive.css">
+  <link rel="stylesheet" href="/css/css_brand_samsung.css">
+  <link rel="stylesheet" href="/fontawesome-free-5.15.3-web/css/all.min.css">
+  <title>Điện thoại Samsung</title>
+</head>
+<body>
+<section>
+  <div class="header">
+    <div id="top1">
+      <a href="index.html"><img src="/image/logo_m.png" style="width: 90%; height: 200%;"/></a>
+    </div>
+    <div class="seachbox">
+      <input type="text" placeholder="Tìm Kiếm Sản Phẩm ">
+      <div class="seach-btn">
+        <a href="#"><i class="fa fa-search fa-2x" aria-hidden="true" style="color: white;"></i></a>
+      </div>
+    </div>
+    <div id="phone">
+      <img src="./image/phone.svg" alt="">
+      <p>Gọi đặt hàng:</p>
+      <h2>0372082758</h2>
+    </div>
+  </div>
+</section>
+<section id="menu">
+  <ul>
+    <li><a href="index.html"><b>Trang Chủ</b></a></li>
+    <li><a href=""><b>Danh mục sản phẩm</b></a>
+      <ul class="submenu" style="width: 100%; left: 0;">
+        <th:block th:each="category :${categorylist}">
+          <li  style="width: 100%;">
+            <a href="#"><b th:text="${category.name}"></b></a>
+
+          </li>
+
+
+        </th:block>
+      </ul>
+    </li>
+
+
+    <li><a href="gio_hang.html"><b>Giỏ Hàng</b></a></li>
+    <li><a href=""><b>Đơn hàng</b></a></li>
+    <li><a href="login.html"><b>Đăng Nhập</b></a></li>
+    <li style="display: none;">
+      <b>
+        <img src="https://i.pinimg.com/70x/83/74/f9/8374f9316fd820b884395c6386d61fed.jpg"
+             style="border-radius: 50%; width: 40px; height: 40px; vertical-align: middle;"/>
+      </b>
+      <a href="index.html">
+        <b>Tien Tai</b>
+      </a>
+    </li>
+    <li style="display: none;">
+      <a href="index.html">
+        <b>Đăng xuất</b>
+      </a>
+    </li>
+  </ul>
+</section>
+<section id="san-pham-chinh">
+  <div class="breadcroumb">
+    <div class="bao-breadcroumb">
+      <a href="index.html" title="Go to Home page"><p>Trang chủ</p></a>
+    </div>
+    <i class="fas fa-angle-right fa-xs"></i>
+    <div class="bao-breadcroumb">
+      <a href="dien_thoai_view.html"><p>Tìm kiếm</p></a>
+    </div>
+
+  </div>
+  <div class="tieu-de">
+    <p>Kết quả tìm kiếm</p>
+  </div>
+  <hr size="5px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+  </div>
+  <div class="row">
+    <div class="col-3 col-s-6 box">
+      <div class="contentsp">
+        <div class="bao-sp-chinh">
+          <a href="ss_s21_ultra.html">
+            <img src="image/Samsung Galaxy S21 Ultra.png" style="width:70%;">
+            <div class="box-name">Samsung Galaxy S21 Ultra 128GB 5G - Chính hãng</div>
+            <div style="color: red; margin-top: 5px; margin-left: 5px; font-size: 17px;">
+              <span>25.200.000 ₫</span>
+              <span style="text-decoration:line-through ; color: gray; font-size: 13px;">26.300.000 ₫</span>
+            </div>
+            <div class="danh-gia">
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <span style="font-size: 12px;">10 đánh giá</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 col-s-6 box">
+      <div class="contentsp">
+        <div class="bao-sp-chinh">
+          <a href="ss_zfold2.html">
+            <img src="image/samsung-galaxy-z-fold-2.jpg" style="width:70%;">
+            <div class="box-name">Samsung Galaxy Z Fold2 5G</div>
+            <div style="color: red; margin-top: 5px; margin-left: 5px; font-size: 17px;">
+              <span>46.500.000 ₫</span>
+              <span style="text-decoration:line-through ; color: gray; font-size: 13px;">49.990.000 ₫</span>
+            </div>
+            <div class="danh-gia">
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <span style="font-size: 12px;">10 đánh giá</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 col-s-6 box">
+      <div class="contentsp">
+        <div class="bao-sp-chinh">
+          <a href="#">
+            <img src="image/samsung-galaxy-a32-20.jpg" alt="">
+            <div class="box-name">Samsung Galaxy A32</div>
+            <div style="color: red; margin-top: 5px; margin-left: 5px; font-size: 17px;">
+              <span>5.900.000 ₫</span>
+              <span style="text-decoration:line-through ; color: gray; font-size: 13px;">6.690.000 ₫</span>
+            </div>
+            <div class="danh-gia">
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <span style="font-size: 12px;">10 đánh giá</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 col-s-6 box">
+      <div class="contentsp">
+        <div class="bao-sp-chinh">
+          <a href="#">
+            <img src="image/samsung-galaxy-a12_2_.jpg" alt="">
+            <div class="box-name">Samsung Galaxy A12</div>
+            <div style="color: red; margin-top: 5px; margin-left: 5px; font-size: 17px;">
+              <span>3.600.000 ₫</span>
+              <span style="text-decoration:line-through ; color: gray; font-size: 13px;">4.290.000 ₫</span>
+            </div>
+            <div class="danh-gia">
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <i class="fas fa-star fa-xs" style="color: rgb(255, 217, 0);"></i>
+              <span style="font-size: 12px;">10 đánh giá</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="thongtin">
+  <div class="header-thongtin">
+    <div class="nav__thongtin">
+      <img src="/image/logo_m.png">
+      <div class="content_thongtin">
+        <p>Hệ thống điện thoại uy tín toàn quốc</p>
+        <ul>
+          <li>Hotline 037.208.2758</li>
+          <li>Cơ sở Hà Nội: 295 Khâm Thiên - Đống Đa - Hà Nội</li>
+          <li>Cơ sở Phú Thọ:  Tp.Việt Trì - Phú Thọ</li>
+          <li>Cơ sở TP.Hồ Chí Minh: 100 Thạnh Mỹ Lợi - Quận 2 - TP.Hồ Chí Minh</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="header-hotro">
+    <div class="nav__hotro">
+      <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+      <ul>
+        <li><a href="#">Cách sạc pin điện thoại kéo dài tuổi thọ pin</a></li>
+        <li><a href="#">Quy trình bảo hành điện thoại</a></li>
+        <li><a href="#">Các phần mềm diện thoại hữu ích nên có</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="header-dichvu">
+    <div class="nav__dichvu">
+      <h3>DỊCH VỤ KHÁCH HÀNG</h3>
+      <ul>
+        <li><a href="#">Giới thiệu về Shop điện thoại</a></li>
+        <li><a href="#">Hướng dẫn đặt hàng</a></li>
+        <li><a href="#">Chính sách đổi trả và bảo hành</a></li>
+        <li><a href="#">Chính sách bảo mật</a></li>
+        <li><a href="#">Liên hệ Shop</a></li>
+        <a href="index.html"><li>Hệ thống cửa hàng</li></a>
+      </ul>
+    </div>
+  </div>
+  <div class="header-thanhtoan">
+    <div class="nav__thanhtoan">
+      <h3>THANH TOÁN</h3>
+      <ul>
+        <img src="/image/Visa_Inc._logo.svg.png" style="width: 20%;">
+        <img src="/image/iconmastercard.png" style="width: 20%;">
+        <img src="/ image/iconatm.png" style="width: 20%;">
+      </ul>
+    </div>
+  </div>
+</section>
+</body>
+</html>
