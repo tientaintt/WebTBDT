@@ -18,4 +18,8 @@ public class CustomerServiceImpl implements CustomerService {
     public void saveUser(CustomerEntity customer){
         customerEntityRepository.save(customer);
     }
+    @Override
+    public CustomerEntity findById(int id){
+        return customerEntityRepository.findById(id);
+    }
 }

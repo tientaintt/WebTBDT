@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/reponsive.css">
+  <link rel="stylesheet" href="/fontawesome-free-5.15.3-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/css_gio_hang.css">
+  <script src="/js/jquery-3.6.0.min.js"></script>
+  <title>Đơn hàng</title>
+  <style>
+    input:invalid {
+      border: solid red 3px;
+    }
+  </style>
+</head>
+<body>
+<section>
+  <div class="header">
+    <div id="top1">
+      <a th:href="@{/}"><img src="/image/logo_m.png" style="width: 90%; height: 200%;"/></a>
+    </div>
+    <div class="seachbox">
+      <form th:action="@{/search/page=0}" method="GET" style="display: flex; width: 100% " >
+        <input type="text" placeholder="Tìm Kiếm Sản Phẩm " name="search_input">
+        <div class="seach-btn" style="justify-items: flex-end; cursor: pointer">
+          <button type="submit" style="border: none; background: none; width: 100%; height: 100%"><i class="fa fa-search fa-2x" aria-hidden="true" style="color: white;"></i></button>
+        </div>
+      </form>
+    </div>
+    <div id="phone">
+      <img src="./image/phone.svg" alt="">
+      <p>Gọi đặt hàng:</p>
+      <h2>0372082758</h2>
+    </div>
+  </div>
+</section>
+<section id="menu">
+  <ul>
+    <li><a th:href="@{/}"><b>Trang Chủ</b></a></li>
+    <li><a href=""><b>Danh mục sản phẩm</b></a>
+      <ul class="submenu" style="width: 100%; left: 0;">
+        <th:block th:each="category :${categorylist}">
+          <li style="width: 100%;">
+            <a th:href="@{/Category/{idCategory}(idCategory=${category.id})}"><b
+                    th:text="${category.name}"></b></a>
+          </li>
+        </th:block>
+      </ul>
+    </li>
+
+
+    <li><a th:href="@{/Cart}"><b>Giỏ Hàng</b></a></li>
+    <li><a th:href="@{/Orders}"><b>Đơn hàng</b></a></li>
+
+    <li th:if="${session.account == null}"><a th:href="@{/Signin}"><b>Đăng Nhập</b></a></li>
+    <th:block th:if="${session.account!=null}">
+      <li>
+        <b>
+          <img th:src="${session.account.avatar}"
+               style="border-radius: 50%; width: 40px; height: 40px; vertical-align: middle;"/>
+        </b>
+        <a th:href="@{/Profile}">
+          <b th:text="${session.account.name}">Tien Tai</b>
+        </a>
+      </li>
+      <li><a th:href="@{/SignOut}"><b>Đăng Xuất</b></a></li>
+    </th:block>
+  </ul>
+</section>
+<section id="chinh">
+  <div class="breadcroumb">
+    <div class="bao-breadcroumb">
+      <a th:href="@{/}" title="Go to Home page"><p>Trang chủ</p></a>
+    </div>
+    <i class="fas fa-angle-right fa-xs"></i>
+    <div class="bao-breadcroumb">
+      <a th:href="@{/Orders}"><p>Đơn hàng</p></a>
+    </div>
+  </div>
+  <hr size="4px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+</section>
+<section id="main_content">
+  <div class="giohang">
+    <div class="giohang__header col l-12 m-12 c-12">
+      <p>ĐƠN HÀNG</p>
+    </div>
+    <div th:if="${session.account == null}">
+      Vui lòng đăng nhập
+      <a th:href="@{/Signin}">
+        Đăng nhập ngay
+      </a>
+    </div>
+    <th:block th:if="${session.account != null}">
+<!--      <form method="post">-->
+        <div class="col l-12 m-12 c-12">
+          <table>
+            <thead>
+            <tr>
+              <th>ID</th>
+<!--              <th style="min-width: 100px;">Tên sản phẩm</th>-->
+<!--              <th>Giá</th>-->
+              <th style="min-width: 50px;">Số lượng sản phẩm</th>
+              <th>Tổng</th>
+              <th style="width: 100px;">Xem</th>
+            </tr>
+            </thead>
+            <tbody id="listCart">
+            <th:block th:each="bill : ${BillDetail}">
+              <tr>
+                <th th:text="${bill.id}"></th>
+<!--                <th><a th:href="@{/Product/{id}(id=${cartDetail.product.id})}" th:text="${cartDetail.product.name}"></a></th>-->
+<!--                <th th:text="${cartDetail.product.price}"></th>-->
+                <th th:text="${bill.getOrderBillDetailEntityList().size()}"></th>
+                <th th:text="${bill.totalPrice}"></th>
+                <th><a th:href="@{/Invoice/{id}(id=${bill.id})}">Chi tiết</a></th>
+
+              </tr>
+            </th:block>
+            </tbody>
+          </table>
+        </div>
+
+<!--      </form>-->
+
+    </th:block>
+
+  </div>
+
+</section>
+</script>
+<section id="thongtin">
+  <div class="header-thongtin">
+    <div class="nav__thongtin">
+      <img src="/image/logo_m.png">
+      <div class="content_thongtin">
+        <p>Hệ thống điện thoại uy tín toàn quốc</p>
+        <ul>
+          <li>Hotline 037.208.2758</li>
+          <li>Cơ sở Hà Nội: 295 Khâm Thiên - Đống Đa - Hà Nội</li>
+          <li>Cơ sở Phú Thọ: Tp.Việt Trì - Phú Thọ</li>
+          <li>Cơ sở TP.Hồ Chí Minh: 100 Thạnh Mỹ Lợi - Quận 2 - TP.Hồ Chí Minh</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="header-hotro">
+    <div class="nav__hotro">
+      <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+      <ul>
+        <li><a href="#">Cách sạc pin điện thoại kéo dài tuổi thọ pin</a></li>
+        <li><a href="#">Quy trình bảo hành điện thoại</a></li>
+        <li><a href="#">Các phần mềm diện thoại hữu ích nên có</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="header-dichvu">
+    <div class="nav__dichvu">
+      <h3>DỊCH VỤ KHÁCH HÀNG</h3>
+      <ul>
+        <li><a href="#">Giới thiệu về Shop điện thoại</a></li>
+        <li><a href="#">Hướng dẫn đặt hàng</a></li>
+        <li><a href="#">Chính sách đổi trả và bảo hành</a></li>
+        <li><a href="#">Chính sách bảo mật</a></li>
+        <li><a href="#">Liên hệ Shop</a></li>
+        <a href="index.html">
+          <li>Hệ thống cửa hàng</li>
+        </a>
+      </ul>
+    </div>
+  </div>
+  <div class="header-thanhtoan">
+    <div class="nav__thanhtoan">
+      <h3>THANH TOÁN</h3>
+      <ul>
+        <img src="/image/Visa_Inc._logo.svg.png" style="width: 20%;">
+        <img src="/image/iconmastercard.png" style="width: 20%;">
+        <img src="/image/iconatm.png" style="width: 20%;">
+      </ul>
+    </div>
+  </div>
+</section>
+</body>
+</html>

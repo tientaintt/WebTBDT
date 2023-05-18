@@ -15,6 +15,7 @@ public class CommentProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(length = 10000)
     private String description;
     private Date commentdate=new Date(new java.util.Date().getTime());;
     private Date modifydate;

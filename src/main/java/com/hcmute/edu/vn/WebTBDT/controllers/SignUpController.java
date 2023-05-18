@@ -1,6 +1,7 @@
 package com.hcmute.edu.vn.WebTBDT.controllers;
 
 import com.hcmute.edu.vn.WebTBDT.entities.CustomerEntity;
+import com.hcmute.edu.vn.WebTBDT.services.CloudinaryService;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.CustomerServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,49 +17,71 @@ import java.util.Base64;
 public class SignUpController {
 
     @Autowired
-    HttpSession httpSession;
+    HttpSession session;
     @Autowired
     CustomerServiceImpl customerService;
+    @Autowired
+    CloudinaryService cloudinaryService;
+
+    @GetMapping("/Signin")
+    private String Signin(Model model) {
+        if (session.getAttribute("error") != null) {
+            model.addAttribute("error", session.getAttribute("error"));
+            session.removeAttribute("error");
+        }
+
+        return "login";
+    }
+
+    @GetMapping("/SignOut")
+    private String signOut(Model model) {
+        session.removeAttribute("account");
+        return "redirect:/home";
+    }
+
     @PostMapping("SignUp")
-    private String signUp(Model model, @ModelAttribute(name ="Customername") String customername,
+    private String signUp(Model model, @ModelAttribute(name = "Customername") String customername,
                           @ModelAttribute(name = "phonenumber") String phonenumber,
-                          @ModelAttribute(name="username") String username,
-                          @ModelAttribute(name="password") String password,
-                          @ModelAttribute(name="confirmpass")String confirmpass){
-        if(password==null|| username==null){
+                          @ModelAttribute(name = "username") String username,
+                          @ModelAttribute(name = "password") String password,
+                          @ModelAttribute(name = "confirmpass") String confirmpass) {
+        if (password == null || username == null) {
             model.addAttribute("error", "Vui lòng nhập đủ thông tin !!");
             return "SignUp";
         }
-        CustomerEntity customer=customerService.findUserByUsername(username);
+        CustomerEntity customer = customerService.findUserByUsername(username);
         System.out.println(username);
-        if(customer==null){
-            if(password.trim().equals(confirmpass.trim())){
+        if (customer == null) {
+            if (password.trim().equals(confirmpass.trim())) {
 
-                password=Base64.getEncoder().encodeToString(password.trim().getBytes());
-                CustomerEntity customer1=new CustomerEntity();
+                password = Base64.getEncoder().encodeToString(password.trim().getBytes());
+                CustomerEntity customer1 = new CustomerEntity();
                 customer1.setActivate(1);
                 customer1.setName(customername.trim());
                 customer1.setPhone(phonenumber.trim());
                 customer1.setRole(0);
                 customer1.setPassWord(password.trim());
                 customer1.setUsername(username.trim());
+
+
+                customer1.setAvatar("https://res.cloudinary.com/dqy4p8xug/image/upload/v1684272398/userImage_oujnyf.png");
+
                 customerService.saveUser(customer1);
 
                 return "redirect:/Signin";
-            }
-            else {
+            } else {
                 model.addAttribute("error", "Mật khẩu xác nhận không đúng !!");
                 return "SignUp";
             }
-        }
-        else{
+        } else {
             model.addAttribute("error", "Username đã tồn tại !!");
             return "SignUp";
         }
 
     }
+
     @GetMapping("signin")
-    private String SignIn(Model model){
+    private String SignIn(Model model) {
         return "redirect:/Signin";
     }
 }

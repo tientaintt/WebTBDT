@@ -96,7 +96,19 @@
     font-size: 15px;
     cursor: pointer;
 }
-
+.giohang__chucnang a {
+    background-color: coral;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 10px;
+    margin-left: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.giohang__chucnang a:hover {
+    background-color: #CD3333;
+}
 .giohang__chucnang button:hover {
     background-color: #CD3333;
 }

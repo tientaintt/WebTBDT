@@ -22,32 +22,34 @@ public class LoginController {
     CustomerServiceImpl customerService;
 
     @GetMapping("/signup")
-    private String signUp(Model model)
-    {
+    private String signUp(Model model) {
+
         return "SignUp";
     }
+
     @PostMapping("login")
-    private  String login(Model model, @ModelAttribute(name="username") String username,
-                          @ModelAttribute(name="password")String password){
-        if(password.isEmpty()|| username.isEmpty()){
+    private String login(Model model, @ModelAttribute(name = "username") String username,
+                         @ModelAttribute(name = "password") String password) {
+        if (password.isEmpty() || username.isEmpty()) {
             model.addAttribute("error", "Vui lòng nhập đủ thông tin !!");
+            session.setAttribute("error", "Vui lòng nhập đủ thông tin !!");
             return "redirect:/Signin";
         }
-        CustomerEntity customer=customerService.findUserByUsername(username);
-        if (customer!=null){
+        CustomerEntity customer = customerService.findUserByUsername(username);
+        if (customer != null) {
 
             String decodedValue = new String(Base64.getDecoder().decode(customer.getPassWord()));
-            if(decodedValue.equals(password.trim())){
+            if (decodedValue.equals(password.trim())) {
                 session.setAttribute("account", customer);
                 return "redirect:/home";
-            }
-            else {
+            } else {
                 model.addAttribute("error", "Mật khẩu hoặc tài khoản không đúng !!");
+                session.setAttribute("error", "Mật khẩu hoặc tài khoản không đúng !!");
                 return "redirect:/Signin";
             }
-        }
-        else {
+        } else {
             model.addAttribute("error", "Mật khẩu hoặc tài khoản không đúng !!");
+            session.setAttribute("error", "Mật khẩu hoặc tài khoản không đúng !!");
             return "redirect:/Signin";
         }
 

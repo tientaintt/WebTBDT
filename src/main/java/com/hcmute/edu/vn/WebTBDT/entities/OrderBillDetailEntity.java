@@ -21,6 +21,7 @@ public class OrderBillDetailEntity {
     private ProductEntity product;
     @ManyToOne
     @JoinColumn(name = "oderBillId")
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private OrderBillEntity orderBill;

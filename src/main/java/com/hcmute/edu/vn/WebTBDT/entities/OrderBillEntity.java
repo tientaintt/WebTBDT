@@ -18,7 +18,7 @@ public class OrderBillEntity {
     private int available;
     private int totalPrice;
     private Date orderDate=new Date(new java.util.Date().getTime());
-    @OneToMany(mappedBy = "orderBill")
+    @OneToMany(mappedBy = "orderBill", cascade = CascadeType.ALL)
     private List<OrderBillDetailEntity>orderBillDetailEntityList;
     @ManyToOne
     @JoinColumn(name = "customerId")

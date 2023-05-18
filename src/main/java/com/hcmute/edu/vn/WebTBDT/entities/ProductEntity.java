@@ -19,6 +19,8 @@ public class ProductEntity {
     private int available;
     private int quantity;
     private int price;
+
+    @Column(length = 10000)
     private String description;
     @ManyToOne
     @JoinColumn(name = "categoryId")

@@ -45,10 +45,10 @@
     border-radius: 0 2em 2em 0;
     box-shadow: 4px 6px 10px 0 rgba(133, 132, 132, 0.7);
 }
-.seach-btn i{
-    margin-top: 7px;
-    margin-left: 12px;
-}
+/*.seach-btn i{*/
+/*    margin-top: 7px;*/
+/*    margin-left: 12px;*/
+/*}*/
 #phone{
     height: 80px;
     width: 15%;
@@ -139,6 +139,7 @@ background: linear-gradient(0deg, rgba(249,213,167,1) 6%, rgba(236,119,233,1) 10
 }
 #menu  ul li:hover .submenu {
     display: block;
+    z-index: 10;
 }
 .submenu1 {
     display: none;
@@ -261,14 +262,18 @@ background: linear-gradient(0deg, rgba(249,213,167,1) 6%, rgba(236,119,233,1) 10
 .bao-sp-chinh{
     height: 360px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* align-content: center; */
+    justify-content: center;
 }
 .bao-sp-chinh a{
-    text-decoration: none;
-    color: black;
+text-decoration: none;
+color: black;
 }
 .contentsp .bao-sp-chinh:hover{
-    border: black 1px solid;
-    box-shadow: 2px 2px 4px 4px rgba(128, 128, 128, 0.597);
+border: black 1px solid;
+box-shadow: 2px 2px 4px 4px rgba(128, 128, 128, 0.597);
 }
 /*  */
 /* css phụ kiện đt */

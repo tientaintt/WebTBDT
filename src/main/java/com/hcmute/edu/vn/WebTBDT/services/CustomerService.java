@@ -6,4 +6,6 @@ public interface CustomerService {
     CustomerEntity findUserByUsername(String username);
 
     void saveUser(CustomerEntity customer);
+
+    CustomerEntity findById(int id);
 }

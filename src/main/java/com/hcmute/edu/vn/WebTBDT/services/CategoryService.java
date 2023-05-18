@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CategoryService {
     List<CategoryEntity> findAll();
+    CategoryEntity findById(int id);
 }

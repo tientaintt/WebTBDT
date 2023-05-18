@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/css_thanhtoan.css">
+    <link rel="stylesheet" href="/css/reponsive.css">
+    <link rel="stylesheet" href="/fontawesome-free-5.15.3-web/css/all.min.css">
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">-->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <title>Thông tin cá nhân</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <style>
+        .capNhatBtn {
+            border: none;
+            background-color: rgba(255, 199, 153, 0.877);
+            /*width: 25%;*/
+            line-height: 35px;
+            border-radius: 1em;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        /* My Profile Page
+------------------------------------- */
+        .edit-profile-photo img {
+            border-radius: 4px;
+            max-width: 130px;
+            width: 100%;
+        }
+
+        .edit-profile-photo {
+            position: relative;
+            display: block;
+            margin-bottom: 35px;
+            margin-bottom: 35px;
+            margin-left: 9%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .change-photo-btn {
+            font-weight: 600;
+            padding: 5px 6px;
+            color: #333;
+            background-color: #fff;
+            border-radius: 50px;
+            display: inline-block;
+            position: relative;
+            font-size: 13px;
+            width: auto;
+            transition: 0.3s;
+            cursor: pointer;
+            line-height: 20px;
+            position: absolute;
+            bottom: 15px;
+            right: 45%;
+            width: auto;
+        }
+
+        .photoUpload {
+            position: relative;
+            overflow: hidden;
+            padding: 3px 12px;
+            cursor: pointer;
+        }
+
+        .photoUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+        .change-photo-btn:hover {
+            color: #fff;
+            background-color: #66676b;
+        }
+
+        .change-photo-btn i { margin-right: 2px; }
+
+        .change-photo-btn {
+            bottom: -30px;
+        }
+
+        .change-photo-btn:hover {
+            background: #7fad39;
+        }
+    </style>
+</head>
+
+<body>
+
+<section>
+    <div class="header">
+        <div id="top1">
+            <a th:href="@{/}"><img src="/image/logo_m.png" style="width: 90%; height: 200%;"/></a>
+        </div>
+        <div class="seachbox">
+            <form th:action="@{/search/page=0}" method="GET" style="display: flex; width: 100% " >
+                <input type="text" placeholder="Tìm Kiếm Sản Phẩm " name="search_input">
+                <div class="seach-btn" style="justify-items: flex-end; cursor: pointer">
+                    <button type="submit" style="border: none; background: none; width: 100%; height: 100%"><i class="fa fa-search fa-2x" aria-hidden="true" style="color: white;"></i></button>
+                </div>
+            </form>
+        </div>
+        <div id="phone">
+            <img src="./image/phone.svg" alt="">
+            <p>Gọi đặt hàng:</p>
+            <h2>0372082758</h2>
+        </div>
+    </div>
+</section>
+<section id="menu">
+    <ul>
+        <li><a th:href="@{/}"><b>Trang Chủ</b></a></li>
+        <li><a href=""><b>Danh mục sản phẩm</b></a>
+            <ul class="submenu" style="width: 100%; left: 0;">
+                <th:block th:each="category :${categorylist}">
+                    <li style="width: 100%;">
+                        <a th:href="@{/Category/{idCategory}(idCategory=${category.id})}"><b
+                                th:text="${category.name}"></b></a>
+                    </li>
+                </th:block>
+            </ul>
+        </li>
+
+
+        <li><a th:href="@{/Cart}"><b>Giỏ Hàng</b></a></li>
+        <li><a th:href="@{/Orders}"><b>Đơn hàng</b></a></li>
+
+        <li th:if="${session.account == null}"><a th:href="@{/Signin}"><b>Đăng Nhập</b></a></li>
+        <th:block th:if="${session.account!=null}">
+            <li>
+                <b>
+                    <img th:src="${session.account.avatar}"
+                         style="border-radius: 50%; width: 40px; height: 40px; vertical-align: middle;"/>
+                </b>
+                <a th:href="@{/Profile}">
+                    <b th:text="${session.account.name}">Tien Tai</b>
+                </a>
+            </li>
+            <li><a th:href="@{/SignOut}"><b>Đăng Xuất</b></a></li>
+        </th:block>
+    </ul>
+</section>
+
+
+<section style="min-height: 300px; margin-top: 30px">
+    <th:block th:if="${session.account != null}">
+        <form method="post" enctype="multipart/form-data">
+            <div class="col-6 col-s-12 form-nhap">
+                <h2>THÔNG TIN CÁ NHÂN</h2>
+                <div th:text="${changeProfileError}" th:if="${changeProfileError}" class="row" style="color: #8f201e; background: #ffd7d6; padding: 12px 12px; text-align: center; line-height: 36px !important;" role="alert"></div>
+                <div th:text="${changeProfileSuccess}" th:if="${changeProfileSuccess}" class="row" style="color: #15642d; background: #d6f0da; padding: 12px 12px; text-align: center; line-height: 36px !important;" role="alert"></div>
+                <!-- Avatar -->
+                <div class="row edit-profile-photo" style="margin-top: 12px; height: unset!important;">
+                    <div style="display: flex; align-items: flex-end;">
+                        <img th:if="${CustomerForm.avatar != null}"
+                             th:src="${CustomerForm.avatar}">
+                        <img th:if="${CustomerForm.avatar == null}" src="/image/userImage.png">
+                        <img id="new-avatar" src="" style="width: 70px; height: 70px;border-radius: 50%; object-fit: cover; visibility: hidden" >
+                    </div>
+
+                    <div class="change-photo-btn">
+                        <div class="photoUpload">
+                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                            <input id="upload-avatar" name="avatar" accept="image/*" type="file" class="upload"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div>
+                        <label for="txt_ten">Tên <span id="s_ten" style="color: red;">*</span></label><br>
+                        <input id="txt_ten" name="name" type="text" required th:value="${CustomerForm.name}">
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-12 col-s-12">
+                        <label for="txt_dchi">Địa chỉ:</label><br>
+                        <input type="text" name="address" id="txt_dchi" required th:value="${CustomerForm.address}">
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-12 col-s-12">
+                        <label for="txt_email">Email <span style="color: red;" id="s_email"> </span> </label><br>
+                        <input type="email" name="email" id="txt_email" required th:value="${CustomerForm.email}">
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-12 col-s-12">
+                        <label for="txt_dienthoai">Số điện thoại <span id="s_dienthoai"> </span></label><br>
+                        <input type="text"  name="phone"id="txt_dienthoai" required th:value="${CustomerForm.phone}">
+                    </div>
+                </div>
+                <div class="row" style="text-align: right;">
+                    <button class="capNhatBtn" formaction="/UpdateProfile">Cập nhật thông tin cá nhân</button>
+                </div>
+            </div>
+        </form>
+        <form method="post">
+            <div class="col-6 col-s-12 form-nhap">
+                <h2>MẬT KHẨU</h2>
+<!--                <div class="row" style="margin-top: 5px;">-->
+                    <div th:text="${changePasswordError}" th:if="${changePasswordError}" class="row" style="color: #8f201e; background: #ffd7d6; padding: 12px 12px; text-align: center; line-height: 36px !important;" role="alert"></div>
+                    <div th:text="${changePasswordSuccess}" th:if="${changePasswordSuccess}" class="row" style="color: #15642d; background: #d6f0da; padding: 12px 12px; text-align: center; line-height: 36px !important;" role="alert"></div>
+<!--                </div>-->
+                <div class="row" style="margin-top: 5px;">
+                    <div>
+                        <label for="txt_pass">Mật khẩu hiện tại <span id="pass" style="color: red;">*</span></label><br>
+                        <input name="current_password" id="txt_pass" type="password" required>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-12 col-s-12">
+                        <label for="txt_newPass">Mật khẩu mới <span id="passNew"
+                                                                    style="color: red;">*</span></label><br>
+                        <input name="new_password" type="password" id="txt_newPass" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-12 col-s-12">
+                        <label for="txt_reNewPass">Nhập lại mật khẩu <span id="passReNew"
+                                                                           style="color: red;">*</span></label><br>
+                        <input name="confirm_password" type="password" id="txt_reNewPass" required>
+                    </div>
+                </div>
+
+                <div class="row" style="text-align: right;">
+                    <button class="capNhatBtn" formaction="UpdatePassword">Cập nhật mật khẩu</button>
+                </div>
+            </div>
+        </form>
+    </th:block>
+    <th:block th:if="${session.account == null}">
+        <h4 style="margin-left: 100px">Vui lòng <a th:href="@{/Signin}"> đăng nhập</a></h4>
+    </th:block>
+</section>
+
+
+<section id="thongtin">
+    <div class="header-thongtin">
+        <div class="nav__thongtin">
+
+            <div class="content_thongtin">
+                <p>Hệ thống điện thoại uy tín toàn quốc</p>
+                <ul>
+                    <li>Hotline 037.208.2758</li>
+                    <li>Cơ sở Hà Nội: 295 Khâm Thiên - Đống Đa - Hà Nội</li>
+                    <li>Cơ sở Phú Thọ: Tp.Việt Trì - Phú Thọ</li>
+                    <li>Cơ sở TP.Hồ Chí Minh: 100 Thạnh Mỹ Lợi - Quận 2 - TP.Hồ Chí Minh</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header-hotro">
+        <div class="nav__hotro">
+            <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+            <ul>
+                <li><a href="#">Cách sạc pin điện thoại kéo dài tuổi thọ pin</a></li>
+                <li><a href="#">Quy trình bảo hành điện thoại</a></li>
+                <li><a href="#">Các phần mềm diện thoại hữu ích nên có</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="header-dichvu">
+        <div class="nav__dichvu">
+            <h3>DỊCH VỤ KHÁCH HÀNG</h3>
+            <ul>
+                <li><a href="#">Giới thiệu về Shop điện thoại</a></li>
+                <li><a href="#">Hướng dẫn đặt hàng</a></li>
+                <li><a href="#">Chính sách đổi trả và bảo hành</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Liên hệ Shop</a></li>
+                <a href="index.html">
+                    <li>Hệ thống cửa hàng</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="header-thanhtoan">
+        <div class="nav__thanhtoan">
+            <h3>THANH TOÁN</h3>
+            <ul>
+                <img src="image/Visa_Inc._logo.svg.png" style="width: 20%;">
+                <img src=" image/iconmastercard.png" style="width: 20%;">
+                <img src=" image/iconatm.png" style="width: 20%;">
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script>
+    const uploadAvatar = document.getElementById("upload-avatar");
+    const newAvatar = document.getElementById("new-avatar");
+
+    uploadAvatar.addEventListener("change", function (e){
+        newAvatar.style.visibility = "visible";
+        let file = uploadAvatar.files[0];
+        let fileSrc = URL.createObjectURL(file)
+        newAvatar.setAttribute("src", fileSrc);
+    })
+</script>
+</body>
+</html>

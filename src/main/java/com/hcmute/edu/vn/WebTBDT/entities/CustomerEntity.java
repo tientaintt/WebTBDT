@@ -14,8 +14,7 @@ public class CustomerEntity {
     private int id;
     private String name;
     private String phone;
-    private int gender;
-    private String province;
+    private String email;
     private String address;
     private String username;
     private String passWord;

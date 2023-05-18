@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/reponsive.css">
+    <!--    <link rel="stylesheet" href="/css/css_brand_samsung.css">-->
+    <link rel="stylesheet" href="/fontawesome-free-5.15.3-web/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .breadcroumb {
+            width: 60%;
+            height: 30px;
+            margin-left: 9%;
+            margin-top: 10px;
+            display: flex;
+        }
+
+        .breadcroumb a {
+            text-decoration: none;
+            padding-right: 5px;
+            color: rgba(24, 24, 24, 0.767);
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .breadcroumb i {
+            padding-left: 5px;
+            padding-right: 8px;
+            margin-top: 2px;
+        }
+
+        .bao-breadcroumb {
+            padding-right: 5px;
+        }
+
+        .bao-breadcroumb:hover a {
+            color: coral;
+            text-decoration: underline;
+        }
+
+        /* ****** */
+        .productnametop {
+            /* position: relative; */
+            width: 60%;
+            height: 50px;
+            margin-left: 9%;
+            display: flex;
+        }
+
+        .productnametop p {
+            font-weight: 900;
+            font-size: 25px;
+        }
+
+        #main {
+            width: 82%;
+            height: 650px;
+            margin-left: 9%;
+            margin-right: 9%;
+            /* background-color: indigo; */
+            display: inline-flex;
+        }
+
+        .div_slide {
+            width: 30%;
+            height: 445px;
+            /* background-color: lemonchiffon; */
+            border: rgba(255, 199, 153, 0.877) solid 2px;
+        }
+
+        .img_product {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            /* background-color: lightblue; */
+            overflow: hidden;
+        }
+
+        /* css slide show galery */
+        .product_img_slide {
+            display: none;
+            box-shadow: 0 0 8px 0;
+        }
+
+        .img_product > .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            margin-top: -50px;
+            background-color: rgba(139, 139, 139, 0.781);
+            color: white;
+            font-weight: bold;
+            font-size: 25px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .img_product > .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+            padding-left: 10px;
+            padding-right: 5px;
+        }
+
+        .img_product > .prev {
+            left: 0;
+            border-radius: 0 3px 3px 0;
+            padding-right: 10px;
+            padding-left: 5px;
+        }
+
+        .product_img_slide img {
+            margin-top: 5px;
+        }
+
+        .img_row:after {
+            display: table;
+            clear: both;
+        }
+
+        .img_product > .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .img_column {
+            float: left;
+            width: 25%;
+        }
+
+        .img_down {
+            margin-top: 22px;
+            cursor: pointer;
+            border: solid 1px coral;
+            background-color: rgba(235, 231, 231, 0.37);
+        }
+
+        /* css slide show galery */
+        /* css address */
+        .produc_shop_right {
+            width: 63%;
+            height: 800px;
+            margin-left: 7%;
+        }
+
+        .address {
+            position: absolute;
+            width: 30%;
+            height: 30px;
+            display: inline-flex;
+        }
+
+        .address p {
+            padding-right: 10px;
+            margin-top: 5px;
+        }
+
+        .address select {
+            width: 50%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* css giá */
+        .price {
+            width: 70%;
+            height: 40px;
+            margin-top: 40px;
+            display: inline-flex;
+        }
+
+        .price h2 {
+            padding-right: 10px;
+            color: red;
+        }
+
+        .price p {
+            margin-top: 5px;
+            padding-right: 10px;
+        }
+
+        .price button {
+            height: 28px;
+            width: 15%;
+            background-color: rgb(240, 63, 63);
+            margin-top: -3px;
+            margin-left: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .price a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .price button:hover a {
+            text-decoration: underline;
+        }
+
+        /* free ship */
+        .free_ship {
+            width: 50%;
+            height: 30px;
+            text-align: center;
+            background-color: rgba(255, 199, 153, 0.877);
+            color: white;
+            border-radius: 5px;
+            font-size: 17px;
+        }
+
+        .free_ship i {
+            margin-top: 5px;
+        }
+
+        .option {
+            width: 100%;
+            height: 200px;
+            /* background-color: aqua; */
+            margin-top: 5px;
+        }
+
+        .bao_box_option {
+            width: 70%;
+            height: 70px;
+            display: flex;
+        }
+
+        .box_option {
+            width: 30%;
+            height: 55px;
+            background-color: white;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-left: 2%;
+            margin-right: 1%;
+            border: solid 1px;
+        }
+
+        .box_option h3 {
+            color: red;
+        }
+
+        .box_option p {
+            font-size: 14px;
+            padding-top: 8px;
+        }
+
+        .box_option:hover {
+            border: rgb(236, 53, 53) solid 2px;
+            cursor: pointer;
+        }
+
+        /* .box_option:focus{
+            border: rgb(236, 53, 53) solid 2px;
+        } */
+        .bao_option_color {
+            width: 70%;
+            height: 70px;
+            display: flex;
+        }
+
+        .option_color {
+            width: 20%;
+            height: 55px;
+            background-color: white;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-left: 2%;
+            margin-right: 1%;
+            border: solid 1px;
+        }
+
+        .option_color input {
+            margin-left: 70px;
+            margin-top: 5px;
+        }
+
+        .option_color:hover {
+            border: rgb(236, 53, 53) solid 2px;
+            cursor: pointer;
+        }
+
+        .option_color input:hover {
+            cursor: pointer;
+        }
+
+        .khuyenmai {
+            width: 55%;
+            height: 130px;
+            border: solid rgb(236, 53, 53) 1px;
+            border-radius: 5px;
+        }
+
+        .headkhuyenmai {
+            position: relative;
+            background-color: red;
+            color: white;
+            width: 40%;
+            height: 30px;
+            margin-top: -17px;
+            border-radius: 1em;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .texthead p {
+            margin-left: 21px;
+            padding-top: 6px;
+        }
+
+        .mainkhuyenmai {
+            font-family: 'Open Sans', sans-serif;
+            margin-left: 3%;
+            margin-top: 6px;
+        }
+
+        .mainkhuyenmai li:hover a {
+            text-decoration: underline;
+        }
+
+        .mainkhuyenmai li {
+            color: red;
+        }
+
+        .mainkhuyenmai a {
+            color: red;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        /*  */
+        .btn_mua {
+            width: 60%;
+            height: 160px;
+            margin-top: 10px;
+        }
+
+        #themgiohang {
+            height: 50px;
+            width: 100%;
+            background-color: white;
+            border: none;
+            text-transform: uppercase;
+            color: coral;
+            margin-bottom: 10px;
+            border: solid 3px coral;
+            border-radius: 5em;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        #themgiohang:hover {
+            background-color: coral;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn_tragop {
+            position: relative;
+        }
+
+        #tragop0 {
+            height: 50px;
+            width: 50%;
+            background-color: white;
+            border: none;
+            text-transform: uppercase;
+            color: rgba(39, 177, 136, 0.863);
+            margin-bottom: 10px;
+            border: solid 3px rgba(39, 177, 136, 0.863);
+            border-radius: 5em;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            float: left;
+        }
+
+        #tragopquathe {
+            height: 50px;
+            width: 50%;
+            background-color: white;
+            border: none;
+            text-transform: uppercase;
+            color: rgba(39, 177, 136, 0.863);
+            margin-bottom: 10px;
+            border: solid 3px rgba(39, 177, 136, 0.863);
+            border-radius: 5em;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            float: left;
+        }
+
+        #tragop0:hover {
+            background-color: rgba(39, 177, 136, 0.863);
+            color: white;
+            cursor: pointer;
+        }
+
+        #tragopquathe:hover {
+            background-color: rgba(39, 177, 136, 0.863);
+            color: white;
+            cursor: pointer;
+        }
+
+        .note_mua {
+            width: 80%;
+            height: 30px;
+            margin-left: 10px;
+            font-size: 13px;
+            margin-left: 15%;
+        }
+
+        .note_mua a {
+            text-decoration: none;
+            color: red;
+        }
+
+        .note_mua a:hover {
+            text-decoration: underline;
+        }
+
+        .note_mua p {
+            margin-top: 5px;
+            margin-left: 5%;
+        }
+
+        /*  */
+        #mota_product {
+            position: relative;
+            width: 82%;
+            /*height: 1750px;*/
+            margin-left: 9%;
+            margin-right: 9%;
+            /* border: solid 1px black; */
+        }
+
+        .mota_trai {
+            width: 70%;
+            /*height: 1700px;*/
+            margin-top: 10px;
+            /* background-color: cadetblue; */
+            /*float: left;*/
+        }
+
+        .write_product header {
+            font-size: 23px;
+            font-weight: 900;
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .mota_phai {
+            width: 27%;
+            height: 1200px;
+            /* background-color: cadetblue; */
+            float: left;
+            margin-left: 3%;
+        }
+
+        .header_mota {
+            width: 100%;
+            height: 40px;
+            background-color: rgba(214, 209, 209, 0.637);
+        }
+
+        .header_mota h3 {
+            text-align: center;
+            padding-top: 8px;
+        }
+
+        #tskt {
+            width: 100%;
+            border: 1px solid rgba(214, 209, 209, 0.637);
+        }
+
+        #tskt tr {
+            width: 100%;
+            height: auto;
+            border: 1px solid rgba(214, 209, 209, 0.637);
+        }
+
+        #ts {
+            width: 65%;
+        }
+
+        #muc {
+            width: 30%;
+            height: auto;
+            font-size: 14px;
+            padding-right: 5%;
+        }
+
+        #tskt td {
+            border-bottom: 1px solid rgba(214, 209, 209, 0.637);
+        }
+
+        /*  */
+        .tieu-de-goi-y {
+            width: 19%;
+            height: 30px;
+            background-color: coral;
+            color: white;
+            margin-top: 15px;
+            margin-left: 9%;
+            border-radius: 1em 1em 0 0;
+        }
+
+        .tieu-de-goi-y p {
+            position: absolute;
+            margin-top: 8px;
+            margin-left: 15px;
+            font-weight: 600;
+        }
+
+        .contentsp:hover {
+            cursor: pointer;
+        }
+
+        /*  */
+        #QnA {
+            width: 82%;
+            height: 290px;
+            margin-left: 9%;
+            margin-right: 9%;
+            position: relative;
+            /* border: solid 1px black; */
+        }
+
+        .main_form {
+            width: 60%;
+            height: 240px;
+            margin-top: 8px;
+            border: 1px solid rgba(165, 164, 164, 0.815);
+            border-radius: 0 0 5px 5px;
+        }
+
+        #form_Q {
+            position: relative;
+            font-family: 'Open Sans', sans-serif;
+            border: 1px solid rgba(165, 164, 164, 0.815);
+        }
+
+        .btn_send {
+            width: 100%;
+            height: 35px;
+            /* background-color: sienna; */
+            margin-top: 15px;
+        }
+
+        .btn_send a {
+            text-decoration: none;
+            color: coral;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .btn_send a:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        #btn_sending {
+            width: 13%;
+            height: 30px;
+            background-color: coral;
+            border: none;
+            border-radius: 5px;
+            float: right;
+            margin-top: -5px;
+            margin-right: 5px;
+        }
+
+        #btn_sending:hover {
+            cursor: pointer;
+        }
+
+        #btn_sending a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+        }
+
+        #btn_sending:hover a {
+            text-decoration: underline;
+        }
+    </style>
+
+    <title th:text="${Product.name}">Xiaomi Mi 11 5G</title>
+
+
+</head>
+
+<body>
+
+<section>
+    <div class="header">
+        <div id="top1">
+            <a th:href="@{/}"><img src="/image/logo_m.png" style="width: 90%; height: 200%;"/></a>
+        </div>
+        <div class="seachbox">
+            <form th:action="@{/search/page=0}" method="GET" style="display: flex; width: 100% ">
+                <input type="text" placeholder="Tìm Kiếm Sản Phẩm " name="search_input">
+                <div class="seach-btn" style="justify-items: flex-end; cursor: pointer">
+                    <button type="submit" style="border: none; background: none; width: 100%; height: 100%"><i
+                            class="fa fa-search fa-2x" aria-hidden="true" style="color: white;"></i></button>
+                </div>
+            </form>
+        </div>
+        <div id="phone">
+            <img src="/image/phone.svg" alt="">
+            <p>Gọi đặt hàng:</p>
+            <h2>0372082758</h2>
+        </div>
+    </div>
+</section>
+<section id="menu">
+    <ul>
+        <li><a th:href="@{/}"><b>Trang Chủ</b></a></li>
+        <li><a href=""><b>Danh mục sản phẩm</b></a>
+            <ul class="submenu" style="width: 100%; left: 0;">
+                <th:block th:each="category :${categorylist}">
+                    <li style="width: 100%;">
+                        <a th:href="@{/Category/{idCategory}(idCategory=${category.id})}"><b
+                                th:text="${category.name}"></b></a>
+                    </li>
+                </th:block>
+            </ul>
+        </li>
+
+
+        <li><a th:href="@{/Cart}"><b>Giỏ Hàng</b></a></li>
+        <li><a th:href="@{/Orders}"><b>Đơn hàng</b></a></li>
+
+        <li th:if="${session.account == null}"><a th:href="@{/Signin}"><b>Đăng Nhập</b></a></li>
+        <th:block th:if="${session.account!=null}">
+            <li>
+                <b>
+                    <img th:src="${session.account.avatar}"
+                         style="border-radius: 50%; width: 40px; height: 40px; vertical-align: middle;"/>
+                </b>
+                <a th:href="@{/Profile}">
+                    <b th:text="${session.account.name}">Tien Tai</b>
+                </a>
+            </li>
+            <li><a th:href="@{/SignOut}"><b>Đăng Xuất</b></a></li>
+        </th:block>
+    </ul>
+</section>
+<section>
+    <div class="breadcroumb">
+        <div class="bao-breadcroumb">
+            <a th:href="@{/}" title="Go to Home page"><p>Trang chủ</p></a>
+        </div>
+        <i class="fas fa-angle-right fa-xs"></i>
+        <div class="bao-breadcroumb">
+            <a th:href="@{/Category/{idCategory}(idCategory=${ProductCategory.id})}"><p
+                    th:text="${ProductCategory.name}">Điện thoại</p></a>
+        </div>
+        <i class="fas fa-angle-right fa-xs"></i>
+        <div class="bao-breadcroumb">
+            <a href="#" th:text="${Product.name}"><p>Xiaomi</p></a>
+        </div>
+
+    </div>
+    <div class="productnametop">
+        <p th:text="${Product.name}">Xiaomi Mi 11 5G</p>
+
+    </div>
+    <hr size="4px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+</section>
+<section id="main">
+    <div class="div_slide">
+        <div class="img_product">
+            <th:block th:each="img, i : ${Product.imagelist}" th:if="${i.index} &lt; 4">
+                <div class="product_img_slide"><img th:src="${img.urlImage}" style="width:100%"></div>
+                <!--                <div class="product_img_slide"><img th:src="${img.urlImage}" style="width:100%"></div>-->
+                <!--                <div class="product_img_slide"><img th:src="${img.urlImage}" style="width:100%"></div>-->
+                <!--                <div class="product_img_slide"><img th:src="${img.urlImage}" style="width:100%"></div>-->
+            </th:block>
+
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+            <div class="img_row">
+                <th:block th:each="img, i : ${Product.imagelist}" th:if="${i.index} &lt; 4">
+                    <div class="img_column"><img class="img_down cursor" th:src="${img.urlImage}"
+                                                 style="width:100%" onclick="currentSlide(1)" alt=""></div>
+                    <!--                    <div class="img_column"><img class="img_down cursor" th:src="${Product.imagelist.get(1).urlImage}" style="width:100%"-->
+                    <!--                                                 onclick="currentSlide(2)" alt=""></div>-->
+                    <!--                    <div class="img_column"><img class="img_down cursor" th:src="${Product.imagelist.get(2).urlImage}"-->
+                    <!--                                                 style="width:100%" onclick="currentSlide(3)" alt=""></div>-->
+                    <!--                    <div class="img_column"><img class="img_down cursor" th:src="${Product.imagelist.get(3).urlImage}"-->
+                    <!--                                                 style="width:100%" onclick="currentSlide(4)" alt=""></div>-->
+                </th:block>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("product_img_slide");
+            var dots = document.getElementsByClassName("img_down");
+            if (n > slides.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = slides.length
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
+    </script>
+    <div class="produc_shop_right">
+        <div class="price">
+            <h2 th:text="${Product.price} + 'đ'">18.490.000 ₫</h2>
+        </div>
+        <div class="free_ship">
+            <p>Miễn phí vận chuyển toàn quốc <i class="fas fa-shipping-fast fa-lm"></i></p>
+        </div>
+        <div class="option">
+            <p><span
+                    style="font-size: 13px; font-weight: 800; font-family: 'Open Sans', sans-serif;">Lựa chọn phiên bản</span>
+            </p>
+            <div class="bao_box_option">
+                <div class="box_option" id="mau" onclick="doimau()">
+                    <H3 th:text="${Product.price} + 'đ'">16.900.000 ₫</H3>
+                </div>
+            </div>
+        </div>
+        <th:block th:if="${Product.quantity <= 0}">
+            <h4>Hàng đã hết hoặc dừng bán!</h4>
+        </th:block>
+        <th:block th:if="${Product.quantity > 0}">
+            <div class="khuyenmai">
+                <div class="mainkhuyenmai">
+                    <h4>Khuyến mãi hãng</h4>
+                    <li><a href="#">Tặng gói bảo hành 2 năm + Bảo hành rơi vỡ màn hình 1 năm</a></li>
+                </div>
+            </div>
+            <div class="btn_mua">
+                <form th:action="@{/Cart/{id}(id=${Product.id})}">
+                    <button id="themgiohang">
+                        Mua ngay
+                        <span style="font-size: 13px;font-weight: 100;"><p>(Giao tận nơi hoặc lấy tại cửa hàng)</p></span>
+                    </button>
+
+                </form>
+            </div>
+        </th:block>
+
+    </div>
+</section>
+<hr size="4px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+<section id="mota_product">
+    <div class="mota_trai" style="height: auto !important;">
+        <div class="write_product">
+            <p th:text="${Product.getDescription()}">Điện thoại Xiaomi Mi 11 - Màn hình tràn viền ấn tượng
+                cùng hiệu năng cao cấp
+            </p>
+            <br>
+        </div>
+    </div>
+
+</section>
+<section id="goi_y">
+    <div class="tieu-de-goi-y">
+        <p>CÁC SẢN PHẨM TƯƠNG TỰ</p>
+    </div>
+    <hr size="5px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+    <div class="row">
+        <th:block th:each="sProc : ${SimilarProduct}">
+            <div class="col-3 col-s-6 box">
+                <div class="contentsp">
+                    <div class="bao-sp-chinh">
+                        <a th:href="@{/Product/{id}(id=${sProc.id})}">
+                            <img th:src="${sProc.imagelist.get(0).urlImage}" alt="">
+                            <div class="box-name" th:text="${sProc.name}">Iphone 12 | Chính hãng VN/A</div>
+                            <div style="color: red; margin-top: 5px; margin-left: 5px; font-size: 17px;">
+                                <span th:text="${sProc.price} + 'đ'">19.800.000 ₫</span>
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </th:block>
+    </div>
+</section>
+<hr size="4px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+<section id="QnA" style="height: unset!important; margin-bottom: 10px">
+    <div class="QnA_tieu_de">
+        <h2>Đánh giá sản phẩm</h2>
+        <div th:if="${session.account == null}" style="font-size: 24px">
+            Vui lòng <a th:href="@{/Signin}">Đăng nhập</a> để đánh giá
+        </div>
+    </div>
+    <div>
+        <ul>
+            <th:block th:each="comment : ${commentList}">
+                <li>
+                    <div th:text="${comment.customer.name}" style="font-weight: 800"></div>
+                    <div th:text="${comment.commentdate}" style="font-weight: 100"></div>
+                    <div th:text="${comment.description}" style="font-weight: 100"></div>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+
+    <div class="main_form" th:if="${session.account != null}">
+        <form method="post" action="/Comment">
+            <textarea name="comment" id="form_Q" cols="92" rows="10"
+                      placeholder="Xin mời để lại đánh giá." minlength="20"></textarea>
+            <div class="btn_send">
+                <a href="#">Quy định đăng bình luận</a>
+                <button name="btn_sending" id="btn_sending" value="OK" onclick="submiting()"><a>GỬI</a></button>
+                <script>
+                    function submiting() {
+                        alert("Cảm ơn bạn đã gửi câu hỏi cho chúng tôi. Chúng tôi sẽ trả lời bạn trong thời gian sớm nhất.");
+
+                    }
+                </script>
+            </div>
+        </form>
+
+    </div>
+</section>
+<section id="thongtin">
+    <div class="header-thongtin">
+        <div class="nav__thongtin">
+            <img src="/image/logo_m.png">
+            <div class="content_thongtin">
+                <p>Hệ thống điện thoại uy tín toàn quốc</p>
+                <ul>
+                    <li>Hotline 037.208.2758</li>
+                    <li>Cơ sở Hà Nội: 295 Khâm Thiên - Đống Đa - Hà Nội</li>
+                    <li>Cơ sở Phú Thọ: Tp.Việt Trì - Phú Thọ</li>
+                    <li>Cơ sở TP.Hồ Chí Minh: 100 Thạnh Mỹ Lợi - Quận 2 - TP.Hồ Chí Minh</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header-hotro">
+        <div class="nav__hotro">
+            <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+            <ul>
+                <li><a href="#">Cách sạc pin điện thoại kéo dài tuổi thọ pin</a></li>
+                <li><a href="#">Quy trình bảo hành điện thoại</a></li>
+                <li><a href="#">Các phần mềm diện thoại hữu ích nên có</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="header-dichvu">
+        <div class="nav__dichvu">
+            <h3>DỊCH VỤ KHÁCH HÀNG</h3>
+            <ul>
+                <li><a href="#">Giới thiệu về Shop điện thoại</a></li>
+                <li><a href="#">Hướng dẫn đặt hàng</a></li>
+                <li><a href="#">Chính sách đổi trả và bảo hành</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Liên hệ Shop</a></li>
+                <a href="index.html">
+                    <li>Hệ thống cửa hàng</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="header-thanhtoan">
+        <div class="nav__thanhtoan">
+            <h3>THANH TOÁN</h3>
+            <ul>
+                <img src="/image/Visa_Inc._logo.svg.png" style="width: 20%;">
+                <img src=" /image/iconmastercard.png" style="width: 20%;">
+                <img src=" /image/iconatm.png" style="width: 20%;">
+            </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>

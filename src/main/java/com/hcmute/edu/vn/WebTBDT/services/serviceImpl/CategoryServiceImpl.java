@@ -16,4 +16,9 @@ public class CategoryServiceImpl implements CategoryService {
        return categoryRepository.findAll();
 
     }
+
+    @Override
+    public CategoryEntity findById(int id) {
+        return categoryRepository.findById(id);
+    }
 }

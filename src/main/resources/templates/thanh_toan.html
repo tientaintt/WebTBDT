@@ -3,20 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/css_thanhtoan.css">
     <link rel="stylesheet" href="/css/reponsive.css">
     <link rel="stylesheet" href="/fontawesome-free-5.15.3-web/css/all.min.css">
-    <link rel="stylesheet" href="/css/css_gio_hang.css">
     <script src="/js/jquery-3.6.0.min.js"></script>
-    <title>Giỏ hàng</title>
-    <style>
-        input:invalid {
-            border: solid red 3px;
-        }
-    </style>
+    <title>Thanh Toán</title>
 </head>
+
 <body>
 <section>
     <div class="header">
@@ -71,80 +66,90 @@
         </th:block>
     </ul>
 </section>
-<section id="chinh">
-    <div class="breadcroumb">
-        <div class="bao-breadcroumb">
-            <a th:href="@{/}" title="Go to Home page"><p>Trang chủ</p></a>
-        </div>
-        <i class="fas fa-angle-right fa-xs"></i>
-        <div class="bao-breadcroumb">
-            <a th:href="@{/Cart}"><p>Giỏ hàng</p></a>
-        </div>
-    </div>
-    <hr size="4px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+
+
+<section style="min-height: 300px; margin-top: 30px">
+    <th:block th:if="${session.account != null}">
+        <form action="/Order" method="post" th:object="${CustomerForm}">
+            <div class="col-6 col-s-12 form-nhap">
+                <h2>THÔNG TIN THANH TOÁN</h2>
+                <div class="row" style="margin-top: 5px;">
+
+                    <div>
+                        <label for="txt_ten">Tên <span id="s_ten" style="color: red;">*</span></label><br>
+                        <input id="txt_ten" type="text" required th:field="*{name}">
+                    </div>
+
+                </div>
+
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-12 col-s-12">
+                        <label for="txt_dchi">Địa chỉ:</label><br>
+                        <input type="text" id="txt_dchi" required th:field="*{address}">
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-12 col-s-12">
+                        <label for="txt_email">Email <span style="color: red;" id="s_email"> </span> </label><br>
+                        <input type="email" id="txt_email" required th:field="*{email}">
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-12 col-s-12">
+                        <label for="txt_dienthoai">Số điện thoại <span id="s_dienthoai"> </span></label><br>
+                        <input type="text" id="txt_dienthoai" required th:field="*{phone}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-s-12 from-thanhtoan">
+                <h2>ĐƠN HÀNG CỦA BẠN</h2>
+                <div class="row thanhtoan">
+                    <div class="col-12 col-s-12" style="text-align: left;">
+                        <label>SẢN PHẨM</label>
+                    </div>
+                    <div class="col-12 col-s-12" style="text-align: right;">
+                        <label>Tổng</label>
+                    </div>
+                </div>
+                <th:block th:each="cartDetail : ${CartDetail}">
+                    <div id="spham" class="row" style="display: flex">
+                        <div class="col-12 col-s-12" style="text-align: left;">
+                            <label th:text="${cartDetail.product.name} + '  x'"></label>
+                            <span th:text="${cartDetail.quantity}" style="color: red; font-weight: 700"></span>
+                        </div>
+                        <div class="col-12 col-s-12" style="text-align: right;">
+                            <label th:text="${cartDetail.price} + 'đ'">Tổng</label>
+                        </div>
+                    </div>
+                </th:block>
+                <div class="row tong">
+                    <div class="col-8 col-s-12" style="text-align: left;">
+                        <label>TỔNG</label>
+                    </div>
+                    <div class="col-4 col-s-12" style="text-align: right;">
+                        <label id="tt" th:text="${CartTotal}">0</label>đ
+                    </div>
+                </div>
+                <div class="row thanhtoan">
+                    <div class="col-12 col-s-12" style="text-align: left;">
+                        <button onclick="DatHang()">ĐẶT HÀNG</button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </th:block>
+    <th:block th:if="${session.account == null}">
+        <h4 style="margin-left: 100px">Vui lòng <a th:href="@{/Signin}"> đăng nhập</a></h4>
+    </th:block>
 </section>
-<section id="main_content">
-    <div class="giohang">
-        <div class="giohang__header col l-12 m-12 c-12">
-            <p>GIỎ HÀNG</p>
-        </div>
-        <div th:if="${session.account == null}">
-            Vui lòng đăng nhập
-            <a th:href="@{/Signin}">
-                Đăng nhập ngay
-            </a>
-        </div>
-        <th:block th:if="${session.account != null}">
-            <form method="post">
-                <div class="col l-12 m-12 c-12">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Sản phẩm</th>
-                            <th style="min-width: 100px;">Tên sản phẩm</th>
-                            <th>Giá</th>
-                            <th style="min-width: 50px;">Số lượng</th>
-                            <th>Tổng</th>
-                            <th style="width: 100px;">Xóa</th>
-                        </tr>
-                        </thead>
-                        <tbody id="listCart">
-                        <th:block th:each="cartDetail : ${CartDetail}">
-                            <tr>
-                                <th><img style="width: 120px" th:src="${cartDetail.product.imagelist.get(0).urlImage}"></th>
-                                <th><a th:href="@{/Product/{id}(id=${cartDetail.product.id})}" th:text="${cartDetail.product.name}"></a></th>
-                                <th th:text="${cartDetail.product.price}"></th>
-                                <th> <input name="cartDetailQuantity" min="1" type="number" th:value="${cartDetail.quantity}" th:max="${cartDetail.product.quantity}"></th>
-                                <th th:text="${cartDetail.price}"></th>
-                                <th><a th:href="@{/DeleteCart/{id}(id=${cartDetail.id})}">Xóa</a></th>
 
-                            </tr>
-                        </th:block>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="giohang__tong col l-12 m-12 c-12">
-                    <span>Tổng tiền đơn hàng:</span>
-                    <span id="spTong" style="padding-left: 10px;" th:text="${CartTotalPrice}">0</span>
-                    <span><u>đ</u></span>
-                </div>
-                <div class="giohang__chucnang col l-12 m-12 c-12">
-                    <a th:href="@{/DeleteCart}">XÓA GIỎ HÀNG</a>
-                    <button formaction="/UpdateCart">CẬP NHẬT GIỎ HÀNG</button>
-                    <a th:href="@{/Order}">THANH TOÁN</a>
-                </div>
-            </form>
 
-        </th:block>
-
-    </div>
-
-</section>
-</script>
 <section id="thongtin">
     <div class="header-thongtin">
         <div class="nav__thongtin">
-            <img src="/image/logo_m.png">
+
             <div class="content_thongtin">
                 <p>Hệ thống điện thoại uy tín toàn quốc</p>
                 <ul>
@@ -185,9 +190,9 @@
         <div class="nav__thanhtoan">
             <h3>THANH TOÁN</h3>
             <ul>
-                <img src="/image/Visa_Inc._logo.svg.png" style="width: 20%;">
-                <img src="/image/iconmastercard.png" style="width: 20%;">
-                <img src="/image/iconatm.png" style="width: 20%;">
+                <img src="image/Visa_Inc._logo.svg.png" style="width: 20%;">
+                <img src=" image/iconmastercard.png" style="width: 20%;">
+                <img src=" image/iconatm.png" style="width: 20%;">
             </ul>
         </div>
     </div>
