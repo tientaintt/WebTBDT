@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
     List<ProductEntity> findAll();
@@ -24,4 +23,10 @@ public interface ProductService {
     List<ProductEntity> find4ByCategoryId(int id, int procId);
 
     void saveProduct(ProductEntity product);
+
+
+    Page<ProductEntity> findPage(int pageNumber , int pageSize);
+
+    void deleteProductById(Integer id);
+
 }

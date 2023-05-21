@@ -4,6 +4,9 @@ import com.hcmute.edu.vn.WebTBDT.entities.OrderBillEntity;
 import com.hcmute.edu.vn.WebTBDT.repositorys.OrderBillEntityRepository;
 import com.hcmute.edu.vn.WebTBDT.services.OrderBillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -33,5 +36,16 @@ public class OrderBillServiceImpl implements OrderBillService {
     @Override
     public void deleteOrderBill(int id){
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<OrderBillEntity> finAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Page<OrderBillEntity> findPage(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber -1 ,pageSize);
+        return this.repository.findAll(pageable);
     }
 }

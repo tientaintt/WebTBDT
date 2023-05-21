@@ -2,11 +2,10 @@ package com.hcmute.edu.vn.WebTBDT.controllers;
 
 import com.hcmute.edu.vn.WebTBDT.entities.*;
 import com.hcmute.edu.vn.WebTBDT.services.MailService;
-import com.hcmute.edu.vn.WebTBDT.services.OrderBillDetailService;
-import com.hcmute.edu.vn.WebTBDT.services.OrderBillService;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +38,59 @@ public class OrderController {
     @Autowired
     MailService mailService;
 
+
+
+
+//    Admin
+
+//    @GetMapping("/Admin_Order")
+//    private String showOrder(Model model)
+//    {
+//
+//        List<OrderBillEntity> order = orderBillService.finAll();
+//
+//        model.addAttribute("order" , order);
+//
+//        return "Admin_Order";
+//    }
+
+    @GetMapping("/Admin_Order/page/{pageNumber}")
+    private String getOnePage(@PathVariable(value = "pageNumber") int pageNumber , Model model)
+    {
+        int pageSize = 5;
+
+
+        Page<OrderBillEntity> orderBillEntityPage = orderBillService.findPage(pageNumber,pageSize);
+
+        int totalPage = orderBillEntityPage.getTotalPages();
+        Long totalItems = orderBillEntityPage.getTotalElements();
+        List<OrderBillEntity> orderBillEntities = orderBillEntityPage.getContent();
+        model.addAttribute("currentPage" , pageNumber);
+        model.addAttribute("totalPages" , totalPage);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("orderBill" ,orderBillEntities);
+
+
+
+
+        return "Admin_Order";
+    }
+
+    @GetMapping("/Admin_Order")
+    public String viewHomePage(Model model)
+    {
+        return getOnePage(1,model);
+    }
+
+
+
+
+
+
+
+
+
+    // User
     @GetMapping("/Order")
     private String order(Model model) {
         CustomerEntity customer = (CustomerEntity) session.getAttribute("account");

@@ -6,6 +6,8 @@ import com.hcmute.edu.vn.WebTBDT.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 @Autowired
@@ -22,4 +24,17 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerEntity findById(int id){
         return customerEntityRepository.findById(id);
     }
+
+    @Override
+    public List<CustomerEntity> findAll() {
+        return customerEntityRepository.findAll();
+    }
+
+    @Override
+    public void deleteUserById(long id) {
+
+       customerEntityRepository.deleteById((int) id);
+    }
+
+
 }

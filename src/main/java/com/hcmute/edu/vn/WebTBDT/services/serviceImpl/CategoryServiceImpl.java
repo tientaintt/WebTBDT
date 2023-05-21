@@ -17,6 +17,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+    public void save(CategoryEntity item)
+    {
+        categoryRepository.save(item);
+    }
+
     @Override
     public CategoryEntity findById(int id) {
         return categoryRepository.findById(id);

@@ -8,4 +8,6 @@ import java.util.List;
 public interface ImageEntityRepository extends JpaRepository<ImageEntity, Integer> {
 
     List<ImageEntity> findAllByProductId(int id);
+
+
 }
