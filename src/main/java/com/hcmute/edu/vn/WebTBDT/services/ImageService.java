@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ImageService {
     List<ImageEntity> findImageByProductId(int id);
+    void saveImage(ImageEntity image);
 }

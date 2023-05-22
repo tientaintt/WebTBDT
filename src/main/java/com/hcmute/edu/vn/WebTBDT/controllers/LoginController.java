@@ -39,7 +39,11 @@ public class LoginController {
             String decodedValue = new String(Base64.getDecoder().decode(customer.getPassWord()));
             if (decodedValue.equals(password.trim())) {
                 session.setAttribute("account", customer);
-                return "redirect:/home";
+                if (username.equals("admin2002") && password.equals("admin20002")) {
+                    return "redirect:/Admin_DashBoard";
+                } else {
+                    return "redirect:/home";
+                }
             } else {
                 model.addAttribute("error", "Mật khẩu hoặc tài khoản không đúng !!");
                 session.setAttribute("error", "Mật khẩu hoặc tài khoản không đúng !!");

@@ -59,7 +59,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="index.html" class="app-brand-link">
+                <a  th:href="@{/}"  class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                         width="25"
@@ -168,19 +168,19 @@
                     </a>
                 </li>
 
-                <li class="menu-item ">
-                    <a href="../Admin/Setting.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bxs-cog"></i>
-                        <div data-i18n="Analytics">Cài đặt</div>
-                    </a>
-                </li>
+<!--                <li class="menu-item ">-->
+<!--                    <a href="../Admin/Setting.html" class="menu-link">-->
+<!--                        <i class="menu-icon tf-icons bx bxs-cog"></i>-->
+<!--                        <div data-i18n="Analytics">Cài đặt</div>-->
+<!--                    </a>-->
+<!--                </li>-->
 
-                <li class="menu-item ">
-                    <a href="#" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-log-out"></i>
-                        <div data-i18n="Analytics">Đăng xuất</div>
-                    </a>
-                </li>
+<!--                <li class="menu-item ">-->
+<!--                    <a href="#" class="menu-link">-->
+<!--                        <i class="menu-icon tf-icons bx bx-log-out"></i>-->
+<!--                        <div data-i18n="Analytics">Đăng xuất</div>-->
+<!--                    </a>-->
+<!--                </li>-->
 
                 <!-- Layouts -->
 
@@ -218,63 +218,63 @@
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
                         <!-- Place this tag where you want the button to render. -->
                         <!-- User -->
-                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                <div class="avatar avatar-online">
-                                    <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0 me-3">
-                                                <div class="avatar avatar-online">
-                                                    <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block">John Doe</span>
-                                                <small class="text-muted">Admin</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-user me-2"></i>
-                                        <span class="align-middle">My Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="auth-login-basic.html">
-                                        <i class="bx bx-power-off me-2"></i>
-                                        <span class="align-middle">Log Out</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+<!--                        <li class="nav-item navbar-dropdown dropdown-user dropdown">-->
+<!--                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">-->
+<!--                                <div class="avatar avatar-online">-->
+<!--                                    <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <ul class="dropdown-menu dropdown-menu-end">-->
+<!--                                <li>-->
+<!--                                    <a class="dropdown-item" href="#">-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <div class="flex-shrink-0 me-3">-->
+<!--                                                <div class="avatar avatar-online">-->
+<!--                                                    <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="flex-grow-1">-->
+<!--                                                <span class="fw-semibold d-block">John Doe</span>-->
+<!--                                                <small class="text-muted">Admin</small>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <div class="dropdown-divider"></div>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a class="dropdown-item" href="#">-->
+<!--                                        <i class="bx bx-user me-2"></i>-->
+<!--                                        <span class="align-middle">My Profile</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a class="dropdown-item" href="#">-->
+<!--                                        <i class="bx bx-cog me-2"></i>-->
+<!--                                        <span class="align-middle">Settings</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a class="dropdown-item" href="#">-->
+<!--                        <span class="d-flex align-items-center align-middle">-->
+<!--                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>-->
+<!--                          <span class="flex-grow-1 align-middle">Billing</span>-->
+<!--                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>-->
+<!--                        </span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <div class="dropdown-divider"></div>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a class="dropdown-item" href="auth-login-basic.html">-->
+<!--                                        <i class="bx bx-power-off me-2"></i>-->
+<!--                                        <span class="align-middle">Log Out</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
                         <!--/ User -->
                     </ul>
                 </div>
@@ -316,16 +316,15 @@
                                 <tbody class="table-border-bottom-0">
 
                                 <th:block th:each="itemProduct : ${products} " >
-                                    <tr>
+                                    <tr >
                                         <td th:text="${itemProduct.id}"></td>
                                         <td th:text="${itemProduct.name}"><i class="fab fa-react fa-lg text-info me-3"></i> <strong></strong>
                                         </td>
-                                        <td ></td>
+                                        <td th:text="${itemProduct.category.name}"></td>
                                         <td th:text="${itemProduct.quantity}">
                                         </td>
                                         <td >
-
-                                            <span th:if="${itemProduct.available == 1}">Sẵn sàng</span>
+                                            <span th:if="${itemProduct.available == 1}">Có Sẵn</span>
                                             <span th:if="${itemProduct.available == 0}">Đang nhập </span>
                                         </td>
                                         <td><span class="badge bg-label-success me-1" style="color:black" th:text="${itemProduct.price}+VND">
@@ -367,7 +366,7 @@
                             </li>
 
 
-                            <li class="page-item"  th:each="i: ${#numbers.sequence(1,5)}">
+                            <li class="page-item"  th:each="i: ${#numbers.sequence(1,totalPages)}">
 
                                     <a class="page-link" active th:href="@{'/Admin_Product/page/' + ${i}}">[[${i}]]</a>
 

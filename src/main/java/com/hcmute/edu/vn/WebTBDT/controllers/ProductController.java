@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -55,17 +56,24 @@ public class ProductController {
         model.addAttribute("Product" , new ProductEntity());
         List<CategoryEntity> clist = categoryService.findAll();
 
-
         model.addAttribute("categorylist", clist);
 
         return "Add_Product";
     }
 
-    @GetMapping("/Add_Product/save_product")
+    @PostMapping("/Add_Product/save_product")
     private String saveProduct(ProductEntity itemProduct , RedirectAttributes rd)
     {
         rd.addFlashAttribute("mesage" , "Đã thêm thành công");
         productService.saveProduct(itemProduct);
+        for( ImageEntity imageUrl : itemProduct.getImagelist())
+        {
+            ImageEntity image = new ImageEntity();
+            image.setId(itemProduct.getId());
+            image.setUrlImage(String.valueOf(imageUrl));
+            imageService.saveImage(image);
+
+        }
         return "redirect:/Admin_Product";
     }
 
@@ -77,6 +85,7 @@ public class ProductController {
 
 
         Page<ProductEntity> productEntityPage = productService.findPage(pageNumber,pageSize);
+
 
         int totalPage = productEntityPage.getTotalPages();
         Long totalItems = productEntityPage.getTotalElements();
@@ -139,6 +148,21 @@ public class ProductController {
         return "edit_info_Product";
     }
 
+    @PostMapping("/edit_info_Product/save_product")
+    private String UpdatePro(ProductEntity itemProduct , RedirectAttributes rd)
+    {
+        rd.addFlashAttribute("mesage" , "Đã câp nhật thành công");
+        productService.saveProduct(itemProduct);
+        for( ImageEntity imageUrl : itemProduct.getImagelist())
+        {
+            ImageEntity image = new ImageEntity();
+            image.setId(itemProduct.getId());
+            image.setUrlImage(String.valueOf(imageUrl));
+            imageService.saveImage(image);
+
+        }
+        return "redirect:/Admin_Product";
+    }
 
 
 
@@ -150,7 +174,8 @@ public class ProductController {
 
 
 
-                         //User User    User    User    User    User    User    User
+
+    //User User    User    User    User    User    User    User
 
     @GetMapping("/Product/{id}")
     private String productDetail(Model model, @PathVariable int id, RedirectAttributes redirAttrs) {

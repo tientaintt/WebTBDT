@@ -17,4 +17,9 @@ public class ImageServicelmpl implements ImageService {
     public List<ImageEntity> findImageByProductId(int id) {
         return imageEntityRepository.findAllByProductId(id);
     }
+
+    @Override
+    public void saveImage(ImageEntity image) {
+        imageEntityRepository.save(image);
+    }
 }

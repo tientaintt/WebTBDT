@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Data
 @Table
@@ -36,5 +36,16 @@ public class ProductEntity {
     private List<CommentProductEntity>commentProductEntityList;
     @OneToMany(mappedBy = "product")
     private List<OrderBillDetailEntity>orderBillDetailEntityList;
+
+    public List<ImageEntity> getImagelist() {
+        return imagelist;
+    }
+
+    public void setImagelist(List<ImageEntity> imagelist) {
+        this.imagelist = imagelist;
+    }
+    public ProductEntity() {
+        this.imagelist = new ArrayList<>();
+    }
 
 }
