@@ -39,7 +39,7 @@ public class LoginController {
             String decodedValue = new String(Base64.getDecoder().decode(customer.getPassWord()));
             if (decodedValue.equals(password.trim())) {
                 session.setAttribute("account", customer);
-                if (username.equals("admin2002") && password.equals("admin20002")) {
+                if (customer.getRole()==1) {
                     return "redirect:/Admin_DashBoard";
                 } else {
                     return "redirect:/home";

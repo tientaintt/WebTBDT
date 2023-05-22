@@ -107,7 +107,7 @@ public class OrderController {
                 }
             }
         }
-        return "/thanh_toan";
+        return "Check_out";
     }
 
     @PostMapping("/Order")
@@ -187,7 +187,7 @@ public class OrderController {
 //                model.addAttribute("CartTotalPrice", cart.getTotalPrice());
             }
         }
-        return "don_hang";
+        return "Order";
     }
 
     @GetMapping("/Invoice")
@@ -206,7 +206,7 @@ public class OrderController {
 
             }
         }
-        return "hoa_don";
+        return "Bill";
     }
 
     @GetMapping("/Invoice/{id}")

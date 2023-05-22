@@ -1,13 +1,10 @@
 package com.hcmute.edu.vn.WebTBDT.controllers;
 
 import com.hcmute.edu.vn.WebTBDT.entities.*;
-import com.hcmute.edu.vn.WebTBDT.services.CartDetailService;
-import com.hcmute.edu.vn.WebTBDT.services.CartService;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.CartDetailServiceImpl;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.CartServiceImpl;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.CategoryServiceImpl;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.ProductServiceImpl;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +43,7 @@ public class CartController {
             }
         }
 
-        return "gio_hang";
+        return "Cart";
     }
 
     @GetMapping("DeleteCart/{id}")
