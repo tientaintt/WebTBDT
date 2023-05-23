@@ -22,4 +22,9 @@ public class ImageServicelmpl implements ImageService {
     public void saveImage(ImageEntity image) {
         imageEntityRepository.save(image);
     }
+
+    @Override
+    public void deleteAll(List<ImageEntity> imageEntities) {
+        imageEntityRepository.deleteAll(imageEntities);
+    }
 }

@@ -339,7 +339,7 @@
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" th:href="@{'/Admin_Product/infor_Product/' + ${itemProduct.id} }" ><i class="bx bx-edit-alt me-1"></i>Chi tiết sản phẩm</a>
                                                     <a class="dropdown-item" th:href="@{'/Admin_Product/edit_info_Product/' + ${itemProduct.id} }"><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
-                                                    <a class="dropdown-item" ><i class="bx bx-trash me-1"></i> Xóa</a>
+                                                    <a class="dropdown-item"  onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')" th:href="@{'/Admin_Product/deletePro/' + ${itemProduct.id} }"><i class="bx bx-trash me-1"></i> Xóa</a>
                                                 </div>
                                             </div>
                                         </td>

@@ -3,6 +3,7 @@ package com.hcmute.edu.vn.WebTBDT.services;
 import com.hcmute.edu.vn.WebTBDT.entities.OrderBillEntity;
 import org.springframework.data.domain.Page;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface OrderBillService {
@@ -19,5 +20,11 @@ public interface OrderBillService {
 
     List<OrderBillEntity> finAll();
     Page<OrderBillEntity> findPage(int pageNumber , int pageSize);
+
+    List<OrderBillEntity> getPaidOrderBills();
+
+    BigDecimal getTotalPaidAmount();
+    int getTotalPaidOrders();
+
 
 }

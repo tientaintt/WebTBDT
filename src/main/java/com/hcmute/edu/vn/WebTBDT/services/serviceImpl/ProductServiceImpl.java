@@ -1,6 +1,8 @@
 package com.hcmute.edu.vn.WebTBDT.services.serviceImpl;
 
+import com.hcmute.edu.vn.WebTBDT.entities.ImageEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.ProductEntity;
+import com.hcmute.edu.vn.WebTBDT.repositorys.ImageEntityRepository;
 import com.hcmute.edu.vn.WebTBDT.repositorys.ProductEntityRepository;
 import com.hcmute.edu.vn.WebTBDT.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService  {
     @Autowired
     ProductEntityRepository repository;
+    @Autowired
+    ImageEntityRepository imageEntityRepository;
     @Override
     public List<ProductEntity> findAll() {
         return repository.findAll();
@@ -66,10 +70,17 @@ public class ProductServiceImpl implements ProductService  {
     }
 
     @Override
-    public void deleteProductById(Integer id) {
+    public void deleteProductById(int  productId) {
 
-        repository.deleteById(id);
+        ProductEntity product = repository.findById(productId);
+        List<ImageEntity> imageEntityList = product.getImagelist();
+        imageEntityRepository.deleteAll(imageEntityList);
+        repository.delete(product);
+
     }
+
+
+
 
 
 

@@ -27,6 +27,6 @@ public interface ProductService {
 
     Page<ProductEntity> findPage(int pageNumber , int pageSize);
 
-    void deleteProductById(Integer id);
+    void deleteProductById(int id);
 
 }
