@@ -35,7 +35,6 @@ public class LoginController {
         }
         CustomerEntity customer = customerService.findUserByUsername(username);
         if (customer != null) {
-
             String decodedValue = new String(Base64.getDecoder().decode(customer.getPassWord()));
             if (decodedValue.equals(password.trim())) {
                 session.setAttribute("account", customer);

@@ -13,7 +13,7 @@ public class OrderBillDetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int quantity;
-    private int available;
+
     @ManyToOne
     @JoinColumn(name = "productId")
     @EqualsAndHashCode.Exclude
