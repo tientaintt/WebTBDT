@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -48,4 +49,21 @@ public class OrderBillServiceImpl implements OrderBillService {
         Pageable pageable = PageRequest.of(pageNumber -1 ,pageSize);
         return this.repository.findAll(pageable);
     }
+
+    @Override
+    public List<OrderBillEntity> getPaidOrderBills() {
+       return repository.findByAvailableEquals(0);
+    }
+
+    @Override
+    public BigDecimal getTotalPaidAmount() {
+        return repository.getToTalPaidAmount();
+    }
+
+    @Override
+    public int getTotalPaidOrders() {
+        return  repository.getTotalPaidOrderCustomer();
+    }
+
+
 }

@@ -70,9 +70,6 @@ public class OrderController {
         model.addAttribute("totalItems", totalItems);
         model.addAttribute("orderBill" ,orderBillEntities);
 
-
-
-
         return "Admin_Order";
     }
 
@@ -81,6 +78,8 @@ public class OrderController {
     {
         return getOnePage(1,model);
     }
+
+
 
 
 

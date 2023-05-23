@@ -85,8 +85,6 @@ public class ProductController {
 
 
         Page<ProductEntity> productEntityPage = productService.findPage(pageNumber,pageSize);
-
-
         int totalPage = productEntityPage.getTotalPages();
         Long totalItems = productEntityPage.getTotalElements();
         List<ProductEntity> productEntities = productEntityPage.getContent();
@@ -94,10 +92,6 @@ public class ProductController {
         model.addAttribute("totalPages" , totalPage);
         model.addAttribute("totalItems", totalItems);
         model.addAttribute("products" ,productEntities);
-
-
-
-
         return "Admin_Product";
     }
 
@@ -164,6 +158,16 @@ public class ProductController {
         return "redirect:/Admin_Product";
     }
 
+    @GetMapping("/Admin_Product/deletePro/{id}")
+    private String deleteProduct(@PathVariable(value = "id") int id, RedirectAttributes rd)
+    {
+
+        rd.addFlashAttribute("mesage" ,"Đã xóa thành công");
+        productService.deleteProductById(id);
+        return "redirect:/Admin_Product";
+
+
+    }
 
 
 

@@ -309,7 +309,7 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1" class="form-label">Danh mục</label>
                                             <select type="text" class="form-control" >
-                                                <option th:each="category : ${itemCategory}" th:value="${itemProduct.category.id}" th:text="${itemCategory.name}" th:field="*{itemProduct.category.id}"></option>
+                                                <option th:each="category : ${itemCategory}" th:value="${itemProduct.category.id}" th:text="${category.name}" th:field="*{itemProduct.category.id}"></option>
 
                                             </select>
 <!--                                            readonly : thêm vào để kh đưược sửa -->
@@ -323,8 +323,8 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1" class="form-label">TRẠNG THÁI</label>
                                             <select class="form-select" name="category" id="exampleFormControlSelect1" aria-label="Default select example" th:value="${itemProduct.quantity}">
-                                                <option th:if="${itemProduct.quantity == 1}">Có sẵn</option>
-                                                <option th:unless="${itemProduct.quantity ==0}">Đang nhập</option>
+                                                <option th:value=1 th:if="${itemProduct.quantity == 1}">Có sẵn</option>
+                                                <option th:value=0 th:unless="${itemProduct.quantity ==0}">Đang nhập</option>
 
                                             </select>
                                         </div>
