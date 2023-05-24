@@ -1,6 +1,5 @@
 package com.hcmute.edu.vn.WebTBDT.services.serviceImpl;
 
-import com.hcmute.edu.vn.WebTBDT.entities.CategoryEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.ImageEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.ProductEntity;
 import com.hcmute.edu.vn.WebTBDT.repositorys.ImageEntityRepository;
@@ -85,23 +84,23 @@ public class ProductServiceImpl implements ProductService  {
 //        repository.updateProduct(name, category, quantity, description, price , available);
 //    }
 
-    public void updateProduct(ProductEntity updatePro)
-    {
-        ProductEntity exitPro = repository.findById(updatePro.getId());
-
-        if(exitPro !=null)
-        {
-            exitPro.setName(updatePro.getName());
-            exitPro.setCategory(updatePro.getCategory());
-            exitPro.setAvailable(updatePro.getAvailable());
-            exitPro.setQuantity(updatePro.getQuantity());
-            exitPro.setDescription(updatePro.getDescription());
-            exitPro.setImagelist(updatePro.getImagelist());
-
-            repository.save(exitPro);
-
-        }
-    }
+//    public void updateProduct(ProductEntity updatePro)
+//    {
+//        ProductEntity exitPro = repository.findById(updatePro.getId());
+//
+//        if(exitPro !=null)
+//        {
+//            exitPro.setName(updatePro.getName());
+//            exitPro.setCategory(updatePro.getCategory());
+//            exitPro.setAvailable(updatePro.getAvailable());
+//            exitPro.setQuantity(updatePro.getQuantity());
+//            exitPro.setDescription(updatePro.getDescription());
+//            exitPro.setImagelist(updatePro.getImagelist());
+//
+//            repository.save(exitPro);
+//
+//        }
+//    }
 
 
 
