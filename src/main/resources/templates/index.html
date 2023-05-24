@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/fontawesome-free-5.15.3-web/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
     <title>Trang chủ</title>
 
 </head>
@@ -17,18 +17,18 @@
 <section>
     <div class="header">
         <div id="top1">
-            <a th:href="@{/Admin_Category}"><img src="/image/logo_m.png" style="width: 90%; height: 200%;"/></a>
+            <a th:href="@{/Admin_Category}"><img src="/image/logo_m.png" style="width: 90%; height: 200%;" alt="Admin"/></a>
         </div>
         <div class="seachbox">
             <form th:action="@{/search/page=0}" method="GET" style="display: flex; width: 100% " >
-                <input type="text" placeholder="Tìm Kiếm Sản Phẩm " name="search_input">
+                <input type="text" placeholder="Tìm Kiếm Sản Phẩm" name="search_input">
                 <div class="seach-btn" style="justify-items: flex-end; cursor: pointer">
                     <button type="submit" style="border: none; background: none; width: 100%; height: 100%"><i class="fa fa-search fa-2x" aria-hidden="true" style="color: white;"></i></button>
                 </div>
             </form>
         </div>
         <div id="phone">
-            <img src="./image/phone.svg" alt="">
+            <img src="/image/phone.svg" alt="">
             <p>Gọi đặt hàng:</p>
             <h2>0372082758</h2>
         </div>
@@ -83,6 +83,37 @@
     </div>
     <script src="./js/jsslide_via.js"></script>
 </section>
+
+    <section  style=" width: 100%;
+    height: 860px;
+    position: relative;">
+        <div class="tieu-de">
+            <p > Sản phẩm bán chạy</p>
+        </div>
+        <hr size="5px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+        <div style="height: auto !important;" class="row">
+            <th:block th:each="product :${top8ProductBS}"  >
+                <div class="col-3 col-s-6 box" style="padding: 5px">
+                    <div class="contentsp">
+                        <div class="bao-sp-chinh">
+                            <a th:href="@{Product/{id}(id=${product.id})}">
+                                <img th:src="${product.getImagelist().get(0).getUrlImage()}">
+                                <!--                                <img src="https://firebasestorage.googleapis.com/v0/b/webtmdt-fec1b.appspot.com/o/realme-7i-xanh-duong_1.jpg?alt=media&token=30856f2f-d8dd-4c93-8321-a6fe5d64b72b">-->
+                                <div class="box-name" th:text="${product.name}"></div>
+                                <div style="color: red; margin-top: 5px; margin-left: 5px; font-size: 17px;">
+                                    <span th:text="${product.getPrice()}+'₫'">2</span>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+
+        </div>
+
+    </section>
+
 
 <th:block th:each="c:${categorylist}">
     <section id="do-choi-cong-nghe" >

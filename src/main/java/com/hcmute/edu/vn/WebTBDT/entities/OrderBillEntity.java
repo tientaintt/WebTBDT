@@ -15,7 +15,7 @@ public class OrderBillEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int status;
+    private int available;
     private int totalPrice;
     private Date orderDate=new Date(new java.util.Date().getTime());
     @OneToMany(mappedBy = "orderBill", cascade = CascadeType.ALL)

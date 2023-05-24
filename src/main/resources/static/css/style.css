@@ -111,7 +111,7 @@ background: linear-gradient(0deg, rgba(249,213,167,1) 6%, rgba(236,119,233,1) 10
     display: inline-block;
     min-width: 150px;
     position: relative;
-    font-size: 14;
+    font-size: 14px;
     line-height: 50px;
     text-align: center;
 }
@@ -119,7 +119,7 @@ background: linear-gradient(0deg, rgba(249,213,167,1) 6%, rgba(236,119,233,1) 10
     padding: 0 36px;
 }
 .submenu > li {
-    font-size: 14;
+    font-size: 14px;
     line-height: 30px;
     width: 150px;
     text-align: left;
@@ -144,11 +144,11 @@ background: linear-gradient(0deg, rgba(249,213,167,1) 6%, rgba(236,119,233,1) 10
 .submenu1 {
     display: none;
     position: absolute;
-    top: 0px;
+    top: 0;
     right: -150px;
 }
 .submenu1 > li{
-    font-size: 14;
+    font-size: 14px;
     line-height: 30px;
     width: 150px;
     text-align: center;
@@ -254,6 +254,7 @@ background: linear-gradient(0deg, rgba(249,213,167,1) 6%, rgba(236,119,233,1) 10
 .contentsp img{
     margin-top: 10px;
     width: 90%;
+    height: 70%;
     transition: all 0.3s ease;
 }
 .contentsp:hover img{

@@ -1,7 +1,9 @@
 package com.hcmute.edu.vn.WebTBDT.controllers;
 
 import com.hcmute.edu.vn.WebTBDT.entities.CategoryEntity;
+import com.hcmute.edu.vn.WebTBDT.entities.ProductEntity;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.CategoryServiceImpl;
+import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.OrderBillDetailServiceImpl;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.ProductServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +21,19 @@ public class HomeController {
     CategoryServiceImpl categoryService;
     @Autowired
     ProductServiceImpl productService;
-
+    @Autowired
+    OrderBillDetailServiceImpl orderBillDetailService;
     @GetMapping("/home")
     private String home(Model model){
 
         List<CategoryEntity> clist = categoryService.findAll();
         model.addAttribute("categorylist",clist);
-
+        List<ProductEntity> pList= orderBillDetailService.find8ProductBestSell();
+        model.addAttribute("top8ProductBS",pList);
         return "index";
     }
     @GetMapping("/")
-    private  String home1(Model model){
+    private  String home1(){
         return "redirect:/home";
     }
 
