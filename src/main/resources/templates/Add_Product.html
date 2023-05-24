@@ -320,10 +320,10 @@
 
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1" class="form-label">TRẠNG THÁI</label>
-                                            <select class="form-select" name="category" id="exampleFormControlSelect1" aria-label="Default select example"  >
+                                            <select class="form-select" name="category" id="exampleFormControlSelect1" aria-label="Default select example" >
                                                 <option selected="">Trạng thái sản phẩm</option>
-                                                <option th:value=1 th:field="*{available}" >Có sẵn</option>
-                                                <option th:value=0 th:field="*{available}" >Đăng nhập</option>
+                                                <option value=1 th:field="*{available}" >Có sẵn</option>
+                                                <option value=0 th:field="*{available}" >Đang nhập</option>
 
                                             </select>
                                         </div>

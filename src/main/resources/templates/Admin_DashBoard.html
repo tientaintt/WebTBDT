@@ -276,17 +276,40 @@
                                     </div>
                                     <ul class="p-0 m-0">
                                         <h6 class="card-title m-0 me-2">Top 4 sản phẩm bán chạy nhất</h6>
-                                        <li class="d-flex mt-4 mb-4 pb-1" th:each="orderBill : ${orderPaided}">
+                                        <li class="d-flex mt-4 mb-4 pb-1" th:each="proHot : ${productHot}">
                                             <div class="avatar flex-shrink-0 me-3">
                                                 <span class="avatar-initial rounded bg-label-success"><i class="bx bx-mobile-alt"></i></span>
                                             </div>
+
                                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                 <div class="me-2">
-                                                    <h6 class="mb-0" th:text="${orderBill.customer.name}">Fashion</h6>
-                                                    <small class="text-muted">T-shirt, Jeans, Shoes</small>
+                                                    <small class="text-muted d-block mb-1" th:text="${proHot.product.category.name}">Momo</small>
+                                                    <h6 class="mb-0" th:text="${proHot.product.name}"></h6>
                                                 </div>
-
+                                                <div class="user-progress d-flex align-items-center gap-1">
+                                                    <h6 class="mb-0" th:text="${proHot.quantity}"></h6>
+                                                    <span class="text-muted">đơn</span>
+                                                </div>
                                             </div>
+
+
+
+<!--                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">-->
+<!--                                                <div class="me-2">-->
+<!--                                                    <h6>-->
+<!--                                                        <h6 class="mb-0" th:text="${proHot.product.name}">Fashion</h6>-->
+<!--                                                        <h7>(<h7 th:text="${proHot.product.category.name}"></h7>)</h7>-->
+<!--                                                   -->
+<!--                                                    </h6>-->
+
+<!--                                                    <small>-->
+<!--                                                        <small class="text-muted" th:text="${proHot.quantity}"></small>-->
+<!--                                                        đơn-->
+<!--                                                    </small>-->
+
+<!--                                                </div>-->
+
+<!--                                            </div>-->
                                         </li>
                                     </ul>
                                 </div>

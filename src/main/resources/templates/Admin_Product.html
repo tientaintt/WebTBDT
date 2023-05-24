@@ -369,15 +369,13 @@
                             <li class="page-item"  th:each="i: ${#numbers.sequence(1,totalPages)}">
 
                                     <a class="page-link" active th:href="@{'/Admin_Product/page/' + ${i}}">[[${i}]]</a>
-
-
                             </li>
                             <li class="page-item ">
                                 <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/Admin_Product/page/' +${currentPage + 1 } }" ><i class="tf-icon bx bx-chevrons-right"></i></a>
                                 <span th:unless="${currentPage < totalItems}"></span>
                             </li>
 <!--                            <li class="page-item ">-->
-<!--                                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/Admin_Product/' +${currentPage + totalPages } }" ><i class="tf-icon bx bx-chevrons-right"></i></a>-->
+<!--                                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/Admin_Product/page/' +${totalPages } }" >End</i></a>-->
 <!--                                <span th:unless="${currentPage < totalItems}"></span>-->
 <!--                            </li>-->
                         </ul>

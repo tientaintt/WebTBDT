@@ -3,6 +3,7 @@ package com.hcmute.edu.vn.WebTBDT.repositorys;
 import com.hcmute.edu.vn.WebTBDT.Model.ProductSell;
 import com.hcmute.edu.vn.WebTBDT.entities.OrderBillDetailEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.ProductEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,4 +15,7 @@ public interface OrderBillDetailEntityRepository extends JpaRepository<OrderBill
     List<ProductEntity> get8ProductMostQuantities();
     @Query("SELECT obd.product,obd.quantity as numSell FROM order_bill_detail obd GROUP BY obd.product ORDER BY SUM(obd.quantity) ")
     List<ProductSell> getProductSell();
+
+    @Query("select p FROM order_bill_detail p ORDER BY p.quantity DESC ")
+    List<OrderBillDetailEntity> findTop4Producthot(Pageable pageable);
 }

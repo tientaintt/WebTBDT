@@ -11,4 +11,7 @@ public interface OrderBillDetailService {
     List<ProductEntity> find8ProductBestSell();
     void saveOrderBillDetail(OrderBillDetailEntity orderBillDetailEntity);
     List<ProductSell> getProductSell();
+
+
+    List<OrderBillDetailEntity> getTop4ProductHot();
 }

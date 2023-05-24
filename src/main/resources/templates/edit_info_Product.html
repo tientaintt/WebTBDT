@@ -322,9 +322,9 @@
 
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1" class="form-label">TRẠNG THÁI</label>
-                                            <select class="form-select" name="category" id="exampleFormControlSelect1" aria-label="Default select example" th:value="${itemProduct.quantity}">
-                                                <option th:value=1 th:if="${itemProduct.quantity == 1}">Có sẵn</option>
-                                                <option th:value=0 th:unless="${itemProduct.quantity ==0}">Đang nhập</option>
+                                            <select class="form-select" name="category" id="exampleFormControlSelect1" aria-label="Default select example" th:value="${itemProduct.available}">
+                                                <option value="1" th:selected="${itemProduct.quantity == 1}">Có sẵn</option>
+                                                <option value="0" th:selected="${itemProduct.quantity ==0}">Đang nhập</option>
 
                                             </select>
                                         </div>

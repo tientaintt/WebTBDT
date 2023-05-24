@@ -29,4 +29,10 @@ public interface ProductService {
 
     void deleteProductById(int id);
 
+//    void updateProduct(String name , CategoryEntity category , int quantity , String description ,int price , int available);
+
+
+
+
+
 }

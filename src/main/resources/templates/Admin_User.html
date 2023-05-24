@@ -263,7 +263,7 @@
                                         </td>
                                         <td>
 
-                                                <a  class="btn btn-primary" th:href="@{/DeleteUser/{id} (id=${user.id})}">DELETE</a>
+                                                <a  class="btn btn-primary" onclick="return confirm('Bạn có chắc chắn muốn xóa đi người dùng này?')"  th:href="@{/DeleteUser/{id} (id=${user.id})}">DELETE</a>
 
 
                                         </td>

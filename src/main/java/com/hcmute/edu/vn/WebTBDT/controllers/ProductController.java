@@ -82,8 +82,6 @@ public class ProductController {
     private String getOnePage(@PathVariable(value = "pageNumber") int pageNumber , Model model)
     {
         int pageSize = 10;
-
-
         Page<ProductEntity> productEntityPage = productService.findPage(pageNumber,pageSize);
         int totalPage = productEntityPage.getTotalPages();
         Long totalItems = productEntityPage.getTotalElements();
@@ -130,10 +128,19 @@ public class ProductController {
     @GetMapping("/Admin_Product/edit_info_Product/{id}")
     public String editInforPro(Model model, @PathVariable(value = "id") Integer id)
     {
+//        model.addAttribute("Product" , new ProductEntity());
+//        List<CategoryEntity> clist = categoryService.findAll();
+//
+//        model.addAttribute("categorylist", clist);
+//
+//        return "Add_Product";
+
+        List<CategoryEntity> listCate = categoryService.findAll();
+
         ProductEntity product = productService.findById(id);
         CategoryEntity category = product.getCategory();
-
         List<ImageEntity> images = imageService.findImageByProductId(id);
+        model.addAttribute("listCate" , listCate);
         model.addAttribute("itemCategory" , category);
         model.addAttribute("image" , images);
 
@@ -146,7 +153,10 @@ public class ProductController {
     private String UpdatePro(ProductEntity itemProduct , RedirectAttributes rd)
     {
         rd.addFlashAttribute("mesage" , "Đã câp nhật thành công");
+
+
         productService.saveProduct(itemProduct);
+//        productService.updateProduct(itemProduct);
         for( ImageEntity imageUrl : itemProduct.getImagelist())
         {
             ImageEntity image = new ImageEntity();
