@@ -324,8 +324,7 @@
                                         <td th:text="${itemProduct.quantity}">
                                         </td>
                                         <td >
-                                            <span th:if="${itemProduct.available == 1}">Có Sẵn</span>
-                                            <span th:if="${itemProduct.available == 0}">Đang nhập </span>
+                                            <span th:text="${itemProduct.available == 1 ? 'Còn bán' : 'Dừng bán'}"></span>
                                         </td>
                                         <td><span class="badge bg-label-success me-1" style="color:black" th:text="${itemProduct.price}+VND">
 

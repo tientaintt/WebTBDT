@@ -299,7 +299,7 @@
                         <div class="col-xl">
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <form  th:action="@{/edit_info_Product/save_product}"  method="post">
+                                    <form  th:action="@{/edit_info_Product/save_product/{id}(id=${itemProduct.id})}"  method="post">
                                         <input type="hidden" name="action" value="addWatch">
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">Tên sản phẩm</label>
@@ -308,8 +308,14 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1" class="form-label">Danh mục</label>
-                                            <select type="text" class="form-control" >
-                                                <option th:each="category : ${itemCategory}" th:value="${itemProduct.category.id}" th:text="${category.name}" th:field="*{itemProduct.category.id}"></option>
+                                            <select type="text" class="form-control" name="category" >
+                                                <th:block th:if="${itemProduct.category != null}">
+                                                    <option th:value="${itemProduct.category.id}" th:selected="selected" th:text="${itemProduct.category.name}"></option>
+                                                </th:block>
+                                                <th:block >
+                                                    <option th:each="cate : ${listCate}" th:value="${cate.id}" th:text="${cate.name}" th:default="${itemProduct.category.name}"></option>
+                                                </th:block>
+
 
                                             </select>
 <!--                                            readonly : thêm vào để kh đưược sửa -->
@@ -317,14 +323,14 @@
 
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">Số lượng</label>
-                                            <input type="text" class="form-control" id="soluongsanpham" name="name" th:value="${itemProduct.quantity}" th:field="*{itemProduct.quantity}">
+                                            <input type="text" class="form-control" id="soluongsanpham" name="quantity" th:value="${itemProduct.quantity}" th:field="*{itemProduct.quantity}">
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="exampleFormControlSelect1" class="form-label">TRẠNG THÁI</label>
-                                            <select class="form-select" name="category" id="exampleFormControlSelect1" aria-label="Default select example" th:value="${itemProduct.available}">
-                                                <option value="1" th:selected="${itemProduct.quantity == 1}">Có sẵn</option>
-                                                <option value="0" th:selected="${itemProduct.quantity ==0}">Đang nhập</option>
+                                            <label for="exampleFormControlSelect1" class="form-label">Trạng thái</label>
+                                            <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" th:value="${itemProduct.available}" name="available">
+                                                <option value="1" th:selected="${itemProduct.available == 1}">Còn bán</option>
+                                                <option value="0" th:selected="${itemProduct.available ==0}">Dừng bán</option>
 
                                             </select>
                                         </div>
@@ -335,7 +341,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Mô tả sản phẩm</label>
-                                            <textarea class="form-control" rows="7" name="description" value="${product.description}" th:text="${itemProduct.description}" th:value="${itemProduct.description}"></textarea>
+                                            <textarea class="form-control" rows="7" name="description" value="${product.description}" th:text="${itemProduct.description}" th:value="${itemProduct.description}" ></textarea>
 
                                         </div>
                                         <div class="mb-3">
@@ -347,15 +353,15 @@
 <!--                                                <img th:src="${image.urlImage}" width="300" height="300">-->
 <!--                                             </input>-->
 
-                                            <span class="form-control"  th:each="image :${image}" >
-                                                <img th:src="${image.urlImage}" width="300" height="300">
+                                            <span class="form-control"  th:each="image :${image}" name="image" >
+                                                <img th:src="${image.urlImage}" width="300" height="300" >
                                              </span>
 
 
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Giá</label>
-                                            <input type="text" class="form-control" name="price" th:value="${itemProduct.price}" th:field="*{itemProduct.price}">
+                                            <input type="text" class="form-control" name="price" th:value="${itemProduct.price}" th:field="${itemProduct.price}">
                                         </div>
                                         <button type="submit" class="btn btn-primary">Chỉnh sửa Thông tin</button>
                                     </form>

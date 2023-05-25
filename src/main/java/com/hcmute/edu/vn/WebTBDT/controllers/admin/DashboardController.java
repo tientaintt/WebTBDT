@@ -1,5 +1,6 @@
 package com.hcmute.edu.vn.WebTBDT.controllers.admin;
 
+import com.hcmute.edu.vn.WebTBDT.Model.ProductSell;
 import com.hcmute.edu.vn.WebTBDT.entities.OrderBillDetailEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.OrderBillEntity;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.OrderBillDetailServiceImpl;
@@ -26,7 +27,7 @@ public class DashboardController {
     public String showDashboard(Model model)
     {
         List<OrderBillEntity> orderBillEntities = orderBillService.getPaidOrderBills();
-        List<OrderBillDetailEntity> orderBillDetailEntities = orderBillDetailService.getTop4ProductHot();
+        List<ProductSell> orderBillDetailEntities = orderBillDetailService.getTop4ProductHot();
         int totalPaidOrder = orderBillService.getTotalPaidOrders();
         BigDecimal totalPaidAmount =orderBillService.getTotalPaidAmount();
 

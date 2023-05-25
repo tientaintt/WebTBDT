@@ -15,10 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -149,22 +146,29 @@ public class ProductController {
         return "edit_info_Product";
     }
 
-    @PostMapping("/edit_info_Product/save_product")
-    private String UpdatePro(ProductEntity itemProduct , RedirectAttributes rd)
+    @PostMapping("/edit_info_Product/save_product/{id}")
+    private String UpdatePro(Model model, @ModelAttribute(name ="name") String namePro,
+                             @ModelAttribute(name="category") int category,
+                             @ModelAttribute(name="quantity") int quantity,
+                             @ModelAttribute(name="available") int available,
+                             @ModelAttribute(name="description") String description,
+                             @ModelAttribute(name="image") String image,
+                             @ModelAttribute(name="price") int price,
+                             @PathVariable int id,
+                             RedirectAttributes rd)
     {
         rd.addFlashAttribute("mesage" , "Đã câp nhật thành công");
+        ProductEntity itemProduct=new ProductEntity();
+        itemProduct.setId(id);
+        itemProduct.setQuantity(quantity);
+        itemProduct.setDescription(description);
+        itemProduct.setPrice(price);
+        itemProduct.setName(namePro);
+        itemProduct.setAvailable(available);
+        itemProduct.setCategory(categoryService.findById(category));
 
-
-        productService.saveProduct(itemProduct);
 //        productService.updateProduct(itemProduct);
-        for( ImageEntity imageUrl : itemProduct.getImagelist())
-        {
-            ImageEntity image = new ImageEntity();
-            image.setId(itemProduct.getId());
-            image.setUrlImage(String.valueOf(imageUrl));
-            imageService.saveImage(image);
-
-        }
+        productService.saveProduct(itemProduct);
         return "redirect:/Admin_Product";
     }
 

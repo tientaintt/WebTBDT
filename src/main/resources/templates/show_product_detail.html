@@ -754,10 +754,10 @@
                 </div>
             </div>
         </div>
-        <th:block th:if="${Product.quantity <= 0}">
+        <th:block th:if="${Product.quantity <= 0 || Product.available==0}">
             <h4>Hàng đã hết hoặc dừng bán!</h4>
         </th:block>
-        <th:block th:if="${Product.quantity > 0}">
+        <th:block th:if="${Product.quantity > 0 && Product.available==1}">
             <div class="khuyenmai">
                 <div class="mainkhuyenmai">
                     <h4>Khuyến mãi hãng</h4>

@@ -13,5 +13,5 @@ public interface OrderBillDetailService {
     List<ProductSell> getProductSell();
 
 
-    List<OrderBillDetailEntity> getTop4ProductHot();
+    List<ProductSell> getTop4ProductHot();
 }

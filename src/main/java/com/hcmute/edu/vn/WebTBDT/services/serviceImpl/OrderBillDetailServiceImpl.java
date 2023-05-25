@@ -7,8 +7,10 @@ import com.hcmute.edu.vn.WebTBDT.repositorys.OrderBillDetailEntityRepository;
 import com.hcmute.edu.vn.WebTBDT.services.OrderBillDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +24,9 @@ public class OrderBillDetailServiceImpl implements OrderBillDetailService {
 
     @Override
     public List<ProductEntity> find8ProductBestSell() {
-        return repository.get8ProductMostQuantities();
+        PageRequest pageRequest = PageRequest.of(0,8);
+
+        return repository.get8ProductMostQuantities(pageRequest);
     }
 
     @Override
@@ -36,10 +40,21 @@ public class OrderBillDetailServiceImpl implements OrderBillDetailService {
     }
 
     @Override
-    public List<OrderBillDetailEntity> getTop4ProductHot() {
+    public List<ProductSell> getTop4ProductHot() {
         PageRequest pageRequest = PageRequest.of(0,4);
 
-        return repository.findTop4Producthot(pageRequest);
+        List<Object[]> result = repository.findTop4Producthot(pageRequest);
+
+        List<ProductSell> productSells = new ArrayList<>();
+        for (Object[] obj : result) {
+            ProductEntity productEntity = (ProductEntity) obj[0];
+            int numSell = ((Number) obj[1]).intValue();
+
+            ProductSell productSell = new ProductSell(productEntity, numSell);
+            productSells.add(productSell);
+        }
+
+        return productSells;
     }
 
 
