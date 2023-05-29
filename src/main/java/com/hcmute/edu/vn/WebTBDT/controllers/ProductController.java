@@ -1,9 +1,6 @@
 package com.hcmute.edu.vn.WebTBDT.controllers;
 
-import com.hcmute.edu.vn.WebTBDT.entities.CategoryEntity;
-import com.hcmute.edu.vn.WebTBDT.entities.CommentProductEntity;
-import com.hcmute.edu.vn.WebTBDT.entities.ImageEntity;
-import com.hcmute.edu.vn.WebTBDT.entities.ProductEntity;
+import com.hcmute.edu.vn.WebTBDT.entities.*;
 import com.hcmute.edu.vn.WebTBDT.services.CommentService;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.CategoryServiceImpl;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.ImageServicelmpl;
@@ -50,6 +47,10 @@ public class ProductController {
     @GetMapping("/Add_Product")
     private String formAddPro(Model model)
     {
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
         model.addAttribute("Product" , new ProductEntity());
         List<CategoryEntity> clist = categoryService.findAll();
 
@@ -61,6 +62,10 @@ public class ProductController {
     @PostMapping("/Add_Product/save_product")
     private String saveProduct(ProductEntity itemProduct , RedirectAttributes rd)
     {
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
         rd.addFlashAttribute("mesage" , "Đã thêm thành công");
         productService.saveProduct(itemProduct);
         for( ImageEntity imageUrl : itemProduct.getImagelist())
@@ -78,6 +83,10 @@ public class ProductController {
     @GetMapping("/Admin_Product/page/{pageNumber}")
     private String getOnePage(@PathVariable(value = "pageNumber") int pageNumber , Model model)
     {
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
         int pageSize = 10;
         Page<ProductEntity> productEntityPage = productService.findPage(pageNumber,pageSize);
         int totalPage = productEntityPage.getTotalPages();
@@ -93,12 +102,21 @@ public class ProductController {
     @GetMapping("/Admin_Product")
     public String viewHomePage(Model model)
     {
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
+
         return getOnePage(1,model);
     }
 
     @GetMapping("/deleteProduct/{id}")
     public String deletePro(@PathVariable (value = "id") Integer id , RedirectAttributes rd)
     {
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
         rd.addFlashAttribute("message" , "Xóa Sản phẩm thành công");
         productService.deleteProductById(id);
         return "redirect:/Admin_Product" ;
@@ -107,7 +125,10 @@ public class ProductController {
     @GetMapping("/Admin_Product/infor_Product/{id}")
     public String showInforPro(Model model , @PathVariable(value = "id") Integer id)
     {
-
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
         ProductEntity product = productService.findById(id);
         CategoryEntity category = product.getCategory();
 
@@ -131,6 +152,10 @@ public class ProductController {
 //        model.addAttribute("categorylist", clist);
 //
 //        return "Add_Product";
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
 
         List<CategoryEntity> listCate = categoryService.findAll();
 
@@ -157,6 +182,10 @@ public class ProductController {
                              @PathVariable int id,
                              RedirectAttributes rd)
     {
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
         rd.addFlashAttribute("mesage" , "Đã câp nhật thành công");
         ProductEntity itemProduct=new ProductEntity();
         itemProduct.setId(id);
@@ -175,7 +204,10 @@ public class ProductController {
     @GetMapping("/Admin_Product/deletePro/{id}")
     private String deleteProduct(@PathVariable(value = "id") int id, RedirectAttributes rd)
     {
-
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
         rd.addFlashAttribute("mesage" ,"Đã xóa thành công");
         productService.deleteProductById(id);
         return "redirect:/Admin_Product";

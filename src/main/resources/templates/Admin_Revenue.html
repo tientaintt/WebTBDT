@@ -224,7 +224,7 @@
 
                     <div class="card">
                         <h5 style="padding-bottom:12px;" class="card-header">Danh sách hóa đơn</h5>
-                        <form action="revenue" method="post"  style="margin-top: 30px">
+                        <form action="/findOrderOfDate" method="post"  style="margin-top: 30px">
                             <div class="row" style="width: 200px">
                                 <label class="col-md-4 col-form-label" style="margin-left: 20px;">Từ</label>
                                 <input class="col-md-4  form-control" name="fromDate" type="date" style="margin-left: 70px;margin-top: -35px" value="<% = new java.util.Date()%>">
@@ -237,6 +237,8 @@
 
 
                         </form>
+                        <div th:text="${error}" th:if="${error}" class="row" style="color: #8f201e; background: #ffd7d6; padding: 12px 12px; text-align: center; line-height: 36px !important;" role="alert"></div>
+
                         <div class="table-responsive text-nowrap">
                             <table class="table table-hover">
                                 <thead>
@@ -252,7 +254,7 @@
 
                                 <tbody class="table-border-bottom-0">
 
-                                <th:block th:each="itemOrder, loop : ${oderBill}">
+                                <th:block th:each="itemOrder, loop : ${orderBill}">
                                     <tr>
                                         <td th:text="${loop.index + 1}"></td>
                                         <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong th:text="${itemOrder.customer.name}"></strong>

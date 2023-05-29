@@ -34,6 +34,17 @@ public class OrderBillServiceImpl implements OrderBillService {
     public OrderBillEntity findById(int id){
         return repository.findById(id);
     }
+
+    @Override
+    public List<OrderBillEntity> findOrderOfDate(Date startD, Date endD) {
+        return null;
+    }
+
+    @Override
+    public List<OrderBillEntity> findOrderOfDate(String startD, String endD) {
+        return repository.findOrdersByDateRange(startD,endD);
+    }
+
     @Override
     public void deleteOrderBill(int id){
         repository.deleteById(id);

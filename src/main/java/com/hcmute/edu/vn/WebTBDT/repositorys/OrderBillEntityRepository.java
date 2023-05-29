@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public interface OrderBillEntityRepository extends JpaRepository<OrderBillEntity, Integer> {
@@ -12,7 +13,8 @@ public interface OrderBillEntityRepository extends JpaRepository<OrderBillEntity
 
     OrderBillEntity findById(int id);
     OrderBillEntity findByIdAndCustomerId(int id, int cusId);
-
+    @Query(value = "SELECT * FROM oder_bill o WHERE o.order_date >= ?1 AND o.order_date <= ?2", nativeQuery = true)
+    List<OrderBillEntity> findOrdersByDateRange(String startDate,String endDate);
 
     List<OrderBillEntity> findByAvailableEquals(int available);
 

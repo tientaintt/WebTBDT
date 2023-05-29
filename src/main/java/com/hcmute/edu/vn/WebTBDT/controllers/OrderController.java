@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -57,6 +58,10 @@ public class OrderController {
     @GetMapping("/Admin_Order/page/{pageNumber}")
     private String getOnePage(@PathVariable(value = "pageNumber") int pageNumber , Model model)
     {
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
         int pageSize = 5;
 
 
@@ -76,6 +81,10 @@ public class OrderController {
     @GetMapping("/Admin_Order")
     public String viewHomePage(Model model)
     {
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer==null || customer.getRole()!=1){
+            return "redirect:/home";
+        }
         return getOnePage(1,model);
     }
 
