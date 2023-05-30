@@ -3,10 +3,13 @@ package com.hcmute.edu.vn.WebTBDT.services;
 import com.hcmute.edu.vn.WebTBDT.entities.ImageEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ImageService {
     List<ImageEntity> findImageByProductId(int id);
     void saveImage(ImageEntity image);
 
     void deleteAll(List<ImageEntity> imageEntities);
+
+
 }

@@ -48,4 +48,6 @@ public class ProductEntity {
         this.imagelist = new ArrayList<>();
     }
 
+
+
 }

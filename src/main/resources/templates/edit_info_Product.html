@@ -299,7 +299,7 @@
                         <div class="col-xl">
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <form  th:action="@{/edit_info_Product/save_product/{id}(id=${itemProduct.id})}"  method="post">
+                                    <form  th:action="@{/edit_info_Product/save_product/{id}(id=${itemProduct.id})}"  method="post" enctype="multipart/form-data" >
                                         <input type="hidden" name="action" value="addWatch">
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">Tên sản phẩm</label>
@@ -354,8 +354,12 @@
 <!--                                             </input>-->
 
                                             <span class="form-control"  th:each="image :${image}" name="image" >
-                                                <img th:src="${image.urlImage}" width="300" height="300" >
+                                                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                                      <img id="previewImage" th:src="${image.urlImage}" width="300" height="300" >
+                                                    <input id="upload" name="image" type="file" onchange="previewFile(this);"  accept="image/*" class="form-control border-0 " multiple>
+                                                </div>
                                              </span>
+
 
 
                                         </div>
@@ -409,5 +413,26 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<script>
+
+    function previewFile(input) {
+        var preview = input.previousElementSibling;
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+
+</script>
+
 </body>
 </html>

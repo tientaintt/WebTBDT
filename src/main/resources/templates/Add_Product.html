@@ -220,64 +220,6 @@
                         <!-- Place this tag where you want the button to render. -->
 
 
-                        <!-- User -->
-<!--                        <li class="nav-item navbar-dropdown dropdown-user dropdown">-->
-<!--                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">-->
-<!--                                <div class="avatar avatar-online">-->
-<!--                                    <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                            <ul class="dropdown-menu dropdown-menu-end">-->
-<!--                                <li>-->
-<!--                                    <a class="dropdown-item" href="#">-->
-<!--                                        <div class="d-flex">-->
-<!--                                            <div class="flex-shrink-0 me-3">-->
-<!--                                                <div class="avatar avatar-online">-->
-<!--                                                    <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <div class="flex-grow-1">-->
-<!--                                                <span class="fw-semibold d-block">John Doe</span>-->
-<!--                                                <small class="text-muted">Admin</small>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <div class="dropdown-divider"></div>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <a class="dropdown-item" href="#">-->
-<!--                                        <i class="bx bx-user me-2"></i>-->
-<!--                                        <span class="align-middle">My Profile</span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <a class="dropdown-item" href="#">-->
-<!--                                        <i class="bx bx-cog me-2"></i>-->
-<!--                                        <span class="align-middle">Settings</span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <a class="dropdown-item" href="#">-->
-<!--                        <span class="d-flex align-items-center align-middle">-->
-<!--                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>-->
-<!--                          <span class="flex-grow-1 align-middle">Billing</span>-->
-<!--                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>-->
-<!--                        </span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <div class="dropdown-divider"></div>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <a class="dropdown-item" href="auth-login-basic.html">-->
-<!--                                        <i class="bx bx-power-off me-2"></i>-->
-<!--                                        <span class="align-middle">Log Out</span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
                         <!--/ User -->
                     </ul>
                 </div>
@@ -299,7 +241,7 @@
                             <div class="card mb-4">
                                 <div class="card-body">
 
-                                    <form th:action="@{/Add_Product/save_product}" method="post" th:object=" ${Product}" >
+                                    <form th:action="@{/Add_Product/save_product}" method="post" th:object=" ${Product}" enctype="multipart/form-data" >
                                         <input type="hidden" name="action" value="addWatch">
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">Tên sản phẩm</label>
@@ -320,16 +262,15 @@
 
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1" class="form-label">TRẠNG THÁI</label>
-                                            <select class="form-select" name="category" id="exampleFormControlSelect1" aria-label="Default select example" >
+                                            <select class="form-select" name="available" id="exampleFormControlSelect1" aria-label="Default select example" >
                                                 <option selected="">Trạng thái sản phẩm</option>
-                                                <option value=1 th:field="*{available}" >Còn bán</option>
-                                                <option value=0 th:field="*{available}" >Dừng bán</option>
+                                                <option value=1  th:selected="${Product.available == 1}" >Còn bán</option>
+                                                <option value=0  th:selected="${Product.available == 0}" >Dừng bán</option>
 
                                             </select>
                                         </div>
 
                                         <div class="mb-3">
-
 
                                         </div>
                                         <div class="mb-3">
@@ -339,7 +280,11 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Hình ảnh sản phầm</label>
-                                            <input class="form-control" rows="3" name="image" value="" >
+                                            <div class="col-lg-6 mx-auto">
+                                                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                                    <input id="upload" name="image" type="file" onchange="readURL(this);"  accept="image/*" class="form-control border-0 " multiple>
+                                                </div>
+                                            </div>
 
                                         </div>
                                         <div class="mb-3">

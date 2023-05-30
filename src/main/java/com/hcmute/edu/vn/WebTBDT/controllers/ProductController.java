@@ -1,6 +1,7 @@
 package com.hcmute.edu.vn.WebTBDT.controllers;
 
 import com.hcmute.edu.vn.WebTBDT.entities.*;
+import com.hcmute.edu.vn.WebTBDT.services.CloudinaryService;
 import com.hcmute.edu.vn.WebTBDT.services.CommentService;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.CategoryServiceImpl;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.ImageServicelmpl;
@@ -13,8 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,19 +32,11 @@ public class ProductController {
     CommentService commentService;
     @Autowired
     ImageServicelmpl imageService;
+    @Autowired
+    CloudinaryService cloudinaryService;
 
 
 
-//    Admin
-
-//    @GetMapping("/Admin_Product")
-//    private String showProduct(Model model)
-//    {
-//        List<ProductEntity> listProduct = productService.findAll();
-//        model.addAttribute("listProduct" , listProduct);
-//
-//        return "Admin_Product";
-//    }
 
 
     @GetMapping("/Add_Product")
@@ -53,29 +48,52 @@ public class ProductController {
         }
         model.addAttribute("Product" , new ProductEntity());
         List<CategoryEntity> clist = categoryService.findAll();
-
         model.addAttribute("categorylist", clist);
+        ImageEntity imageEntity = new ImageEntity();
+
 
         return "Add_Product";
     }
 
     @PostMapping("/Add_Product/save_product")
-    private String saveProduct(ProductEntity itemProduct , RedirectAttributes rd)
+    private String saveProduct(Model model, @ModelAttribute(name ="name") String namePro,
+                               @ModelAttribute(name="category") int category,
+                               @ModelAttribute(name="quantity") int quantity,
+                               @ModelAttribute(name="available") int available,
+                               @ModelAttribute(name="description") String description,
+                               @ModelAttribute("image") MultipartFile[] image,
+                               @ModelAttribute(name="price") int price,
+                               RedirectAttributes rd)
     {
         CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
-        if(customer==null || customer.getRole()!=1){
+        if(customer == null || customer.getRole() != 1) {
             return "redirect:/home";
         }
-        rd.addFlashAttribute("mesage" , "Đã thêm thành công");
-        productService.saveProduct(itemProduct);
-        for( ImageEntity imageUrl : itemProduct.getImagelist())
-        {
-            ImageEntity image = new ImageEntity();
-            image.setId(itemProduct.getId());
-            image.setUrlImage(String.valueOf(imageUrl));
-            imageService.saveImage(image);
+        ProductEntity itemProduct = new ProductEntity();
 
+        itemProduct.setQuantity(quantity);
+        itemProduct.setDescription(description);
+        itemProduct.setPrice(price);
+        itemProduct.setName(namePro);
+        itemProduct.setAvailable(available);
+        itemProduct.setCategory(categoryService.findById(category));
+        productService.saveProduct(itemProduct);
+
+        List<ImageEntity> imageEntityList = new ArrayList<>();
+        for (MultipartFile itemimage : image)
+        {
+            if(itemimage != null && !itemimage.isEmpty())
+            {
+                String uimage =  cloudinaryService.uploadFile(itemimage);
+                ImageEntity imageEntity = new ImageEntity();
+                imageEntity.setUrlImage(uimage);
+                imageEntity.setProduct(itemProduct);
+                imageService.saveImage(imageEntity);
+            }
         }
+
+        itemProduct.setImagelist(imageEntityList);
+        rd.addFlashAttribute("mesage", "Đã thêm sản phẩm thành công");
         return "redirect:/Admin_Product";
     }
 
@@ -146,17 +164,11 @@ public class ProductController {
     @GetMapping("/Admin_Product/edit_info_Product/{id}")
     public String editInforPro(Model model, @PathVariable(value = "id") Integer id)
     {
-//        model.addAttribute("Product" , new ProductEntity());
-//        List<CategoryEntity> clist = categoryService.findAll();
-//
-//        model.addAttribute("categorylist", clist);
-//
-//        return "Add_Product";
+
         CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
         if(customer==null || customer.getRole()!=1){
             return "redirect:/home";
         }
-
         List<CategoryEntity> listCate = categoryService.findAll();
 
         ProductEntity product = productService.findById(id);
@@ -177,7 +189,7 @@ public class ProductController {
                              @ModelAttribute(name="quantity") int quantity,
                              @ModelAttribute(name="available") int available,
                              @ModelAttribute(name="description") String description,
-                             @ModelAttribute(name="image") String image,
+                             @ModelAttribute(name="image") MultipartFile[] image,
                              @ModelAttribute(name="price") int price,
                              @PathVariable int id,
                              RedirectAttributes rd)
@@ -186,7 +198,7 @@ public class ProductController {
         if(customer==null || customer.getRole()!=1){
             return "redirect:/home";
         }
-        rd.addFlashAttribute("mesage" , "Đã câp nhật thành công");
+
         ProductEntity itemProduct=new ProductEntity();
         itemProduct.setId(id);
         itemProduct.setQuantity(quantity);
@@ -195,9 +207,28 @@ public class ProductController {
         itemProduct.setName(namePro);
         itemProduct.setAvailable(available);
         itemProduct.setCategory(categoryService.findById(category));
+        productService.saveProduct(itemProduct);
+
+        List<ImageEntity> imageEntityList = new ArrayList<>();
+
+            for (MultipartFile itemImage : image)
+            {
+                if(!itemImage.isEmpty())
+                {
+                    String uimage = cloudinaryService.uploadFile(itemImage);
+                    ImageEntity imageEntity = new ImageEntity();
+                    imageEntity.setUrlImage(uimage);
+                    imageEntity.setProduct(itemProduct);
+                    imageService.saveImage(imageEntity);
+                }
+            }
+
+
+            itemProduct.setImagelist(imageEntityList);
 
 //        productService.updateProduct(itemProduct);
-        productService.saveProduct(itemProduct);
+
+        rd.addFlashAttribute("mesage" , "Đã câp nhật thành công");
         return "redirect:/Admin_Product";
     }
 
