@@ -1,6 +1,7 @@
 package com.hcmute.edu.vn.WebTBDT.services;
 
 import com.hcmute.edu.vn.WebTBDT.Model.ProductSell;
+import com.hcmute.edu.vn.WebTBDT.entities.CustomerEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.OrderBillDetailEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.ProductEntity;
 
@@ -12,6 +13,6 @@ public interface OrderBillDetailService {
     void saveOrderBillDetail(OrderBillDetailEntity orderBillDetailEntity);
     List<ProductSell> getProductSell();
 
-
+    List<Integer> recomendProduct(int customer);
     List<ProductSell> getTop4ProductHot();
 }

@@ -1,9 +1,12 @@
 package com.hcmute.edu.vn.WebTBDT.services.serviceImpl;
 
 import com.hcmute.edu.vn.WebTBDT.Model.ProductSell;
+import com.hcmute.edu.vn.WebTBDT.entities.CustomerEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.OrderBillDetailEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.ProductEntity;
 import com.hcmute.edu.vn.WebTBDT.repositorys.OrderBillDetailEntityRepository;
+import com.hcmute.edu.vn.WebTBDT.repositorys.OrderBillEntityRepository;
+import com.hcmute.edu.vn.WebTBDT.repositorys.ProductEntityRepository;
 import com.hcmute.edu.vn.WebTBDT.services.OrderBillDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +20,11 @@ import java.util.List;
 public class OrderBillDetailServiceImpl implements OrderBillDetailService {
     @Autowired
     OrderBillDetailEntityRepository repository;
+    @Autowired
+    private OrderBillEntityRepository orderBillEntityRepository;
+    @Autowired
+    private ProductEntityRepository productEntityRepository;
+
     @Override
     public List<OrderBillDetailEntity> findAllByOrderBillId(int id){
         return repository.findAllByOrderBillId(id);
@@ -37,6 +45,12 @@ public class OrderBillDetailServiceImpl implements OrderBillDetailService {
     @Override
     public List<ProductSell> getProductSell() {
         return repository.getProductSell();
+    }
+
+    @Override
+    public List<Integer> recomendProduct(int idcustomer) {
+        PageRequest pageRequest = PageRequest.of(0,8);
+        return repository.recomendProduct(idcustomer,pageRequest);
     }
 
     @Override

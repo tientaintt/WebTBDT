@@ -1,6 +1,7 @@
 package com.hcmute.edu.vn.WebTBDT.controllers;
 
 import com.hcmute.edu.vn.WebTBDT.entities.CategoryEntity;
+import com.hcmute.edu.vn.WebTBDT.entities.CustomerEntity;
 import com.hcmute.edu.vn.WebTBDT.entities.ProductEntity;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.CategoryServiceImpl;
 import com.hcmute.edu.vn.WebTBDT.services.serviceImpl.OrderBillDetailServiceImpl;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,7 +32,19 @@ public class HomeController {
         model.addAttribute("categorylist",clist);
         List<ProductEntity> pList= orderBillDetailService.find8ProductBestSell();
         model.addAttribute("top8ProductBS",pList);
+        CustomerEntity customer = (CustomerEntity) session.getAttribute("account");
+        if(customer!=null ){
+            List<ProductEntity> recommendProduct=new ArrayList<>();
+            List<Integer>listid=orderBillDetailService.recomendProduct(customer.getId());
+            for(int i:listid){
+                ProductEntity product=new ProductEntity();
+                product=productService.findById(i);
+                recommendProduct.add(product);
+            }
+            model.addAttribute("reProduct",recommendProduct);
+        }
         return "index";
+
     }
     @GetMapping("/")
     private  String home1(){

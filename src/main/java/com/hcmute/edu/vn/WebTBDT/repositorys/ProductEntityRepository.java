@@ -26,6 +26,7 @@ public interface ProductEntityRepository extends JpaRepository<ProductEntity, In
     @Query(value = "select * from product p where ?1 = p.category_id LIMIT 8", nativeQuery = true)
     List<ProductEntity> find8ByCategoryId(int id);
 
+
 //    @Query("update product p set p.name = :name , p.category = :category , p.quantity = :quantity , p.description = :description , p.price = :price ,p.available = :available" )
 //    void updateProduct(@Param("name") String name , @Param("category")CategoryEntity category ,@Param("quantity") int quantity , @Param("description") String description , @Param("price") int price, @Param("available") int available);
 

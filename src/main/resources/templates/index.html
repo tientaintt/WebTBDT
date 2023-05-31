@@ -114,6 +114,58 @@
 
     </section>
 
+<!--<section  style=" width: 100%;-->
+<!--    height: 860px;-->
+<!--    position: relative;">-->
+<!--    <div class="tieu-de">-->
+<!--        <p > Đề xuất </p>-->
+<!--    </div>-->
+<!--    <hr size="5px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">-->
+<!--    <div style="height: auto !important;" class="row">-->
+<!--        <th:block th:each="product :${reProduct}"  >-->
+<!--            <div class="col-3 col-s-6 box" style="padding: 5px">-->
+<!--                <div class="contentsp">-->
+<!--                    <div class="bao-sp-chinh">-->
+<!--                        <a th:href="@{Product/{id}(id=${product.id})}">-->
+<!--                            <img th:src="${product.getImagelist().get(0).getUrlImage()}">-->
+<!--                            &lt;!&ndash;                                <img src="https://firebasestorage.googleapis.com/v0/b/webtmdt-fec1b.appspot.com/o/realme-7i-xanh-duong_1.jpg?alt=media&token=30856f2f-d8dd-4c93-8321-a6fe5d64b72b">&ndash;&gt;-->
+<!--                            <div class="box-name" th:text="${product.name}"></div>-->
+<!--                            <div style="color: red; margin-top: 5px; margin-left: 5px; font-size: 17px;">-->
+<!--                                <span th:text="${product.getPrice()}+'₫'">2</span>-->
+<!--                            </div>-->
+
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </th:block>-->
+
+<!--    </div>-->
+
+<!--</section>-->
+<section th:if="${not #lists.isEmpty(reProduct)}" style="width: 100%; height: 860px; position: relative;">
+    <div class="tieu-de">
+        <p>Đề xuất</p>
+    </div>
+    <hr size="5px" width="82%" color="coral" style="margin-bottom: 20px; margin-left: 9%;">
+    <div style="height: auto !important;" class="row">
+        <th:block th:each="product :${reProduct}">
+            <div class="col-3 col-s-6 box" style="padding: 5px">
+                <div class="contentsp">
+                    <div class="bao-sp-chinh">
+                        <a th:href="@{Product/{id}(id=${product.id})}">
+                            <img th:src="${product.getImagelist().get(0).getUrlImage()}">
+                            <div class="box-name" th:text="${product.name}"></div>
+                            <div style="color: red; margin-top: 5px; margin-left: 5px; font-size: 17px;">
+                                <span th:text="${product.getPrice()}+'₫'">2</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</section>
 
 <th:block th:each="c:${categorylist}">
     <section id="do-choi-cong-nghe" >
